@@ -1,0 +1,4 @@
+2024-01-06 00:07:57.086 +04:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [AspNetUsers] ADD CONSTRAINT [FK_AspNetUsers_AspNetRoles_identityRoleId] FOREIGN KEY ([identityRoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE;
+2024-01-06 00:10:41.449 +04:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [AspNetUsers] ADD CONSTRAINT [FK_AspNetUsers_AspNetRoles_identityRoleId] FOREIGN KEY ([identityRoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE;

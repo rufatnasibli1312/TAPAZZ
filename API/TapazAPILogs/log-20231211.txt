@@ -1,0 +1,9 @@
+2023-12-11 19:00:16.966 +04:00 [INF] ProductController.GetALlProducts()
+2023-12-11 19:00:39.847 +04:00 [INF] ProductController.GetProduct()
+2023-12-11 19:27:05.037 +04:00 [INF] ProductController.GetMyProducts()
+2023-12-11 19:27:22.274 +04:00 [ERR] ProductController.GetMyProducts()
+2023-12-11 19:28:27.076 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2023-12-11 19:28:48.717 +04:00 [INF] ProductController.GetMyProducts()
+2023-12-11 19:30:10.260 +04:00 [INF] AccountController.Login({"Email":"heqiqet@gmail.com","Password":"Rufat123"}
+2023-12-11 19:30:57.744 +04:00 [INF] ProductController.CreateProduct(DTO.ProductDto_s.ProductAddDto)
+2023-12-11 19:31:12.080 +04:00 [INF] ProductController.GetMyProducts()

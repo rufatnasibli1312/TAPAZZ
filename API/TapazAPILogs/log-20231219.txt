@@ -1,0 +1,15 @@
+2023-12-19 22:00:18.896 +04:00 [INF] CategoryController.GetAllCategory()
+2023-12-19 22:02:02.290 +04:00 [INF] CategoryController.GetCategory(54)
+2023-12-19 22:02:28.287 +04:00 [INF] CategoryController.GetCategory(53)
+2023-12-19 22:03:15.622 +04:00 [INF] CategoryController.GetCategory(53)
+2023-12-19 23:01:30.911 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2023-12-19 23:01:57.688 +04:00 [INF] FavouriteController.AddFavourites({"ProductId":1})
+2023-12-19 23:07:11.871 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2023-12-19 23:07:33.570 +04:00 [INF] FavouriteController.AddFavourites({"ProductId":1})
+2023-12-19 23:18:27.849 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2023-12-19 23:18:49.009 +04:00 [INF] FavouriteController.AddFavourites({"ProductId":1})
+2023-12-19 23:18:53.039 +04:00 [ERR] FavouriteController.AddFavourites({"ProductId":1})
+2023-12-19 23:19:23.306 +04:00 [INF] AccountController.Login({"Email":"heqiqet@gmail.com","Password":"Rufat123"}
+2023-12-19 23:19:57.836 +04:00 [INF] FavouriteController.AddFavourites({"ProductId":1})
+2023-12-19 23:22:33.423 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2023-12-19 23:22:51.931 +04:00 [INF] FavouriteController.AddFavourites({"ProductId":5})

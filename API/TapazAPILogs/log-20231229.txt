@@ -1,0 +1,2 @@
+2023-12-29 17:24:06.132 +04:00 [INF] AccountController.Login({"Email":"rufetnesibli2004@gmail.com","Password":"Rufat123"}
+2023-12-29 17:24:19.292 +04:00 [ERR] AccountController.Login({"Email":"rufetnesibli2004@gmail.com","Password":"Rufat123"}

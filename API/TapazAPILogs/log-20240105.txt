@@ -1,0 +1,55 @@
+2024-01-05 20:37:55.571 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 20:44:47.818 +04:00 [INF] AccountController.Login({"Email":"heqiqet@gmail.com","Password":"Rufat123"}
+2024-01-05 20:45:18.572 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-05 20:47:05.568 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 20:47:35.447 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-05 20:48:41.161 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-05 20:50:29.790 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-05 20:52:24.451 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-05 20:53:19.707 +04:00 [INF] ProductController.CreateProduct({"Name":"Iphone 15","Description":"Qara 4kamerali","IsNew":true,"IsDelivered":false,"Price":2500,"Photos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photos\u0022; filename=\u0022ee747e25ad2aea28ad27e6efe0ca9dea.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photos\u0022; filename=\u0022ee747e25ad2aea28ad27e6efe0ca9dea.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":11237,"Name":"Photos","FileName":"ee747e25ad2aea28ad27e6efe0ca9dea.jpg"}],"LocationId":27,"CategoryId":53})
+2024-01-05 21:02:32.179 +04:00 [INF] AccountController.Register({"Email":"reshad@gmail.com","Password":"Rufat123","Fullname":"Reshad Eliyev","Address":"Qazax","Photo":{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photo\u0022; filename=\u0022Image 4.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photo\u0022; filename=\u0022Image 4.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":2027960,"Name":"Photo","FileName":"Image 4.jpg"},"PhoneNumber":"\u002B994 55 768 35 23"}
+2024-01-05 21:05:15.450 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-05 21:05:43.059 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 21:08:11.071 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 21:08:55.394 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 21:10:10.706 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 21:10:27.306 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 21:11:54.743 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 21:12:16.260 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 21:17:30.437 +04:00 [INF] CategoryController.GetCategory(53)
+2024-01-05 21:31:21.477 +04:00 [INF] CategoryController.GetCategory(52)
+2024-01-05 21:33:51.587 +04:00 [INF] CategoryController.GetCategory(53)
+2024-01-05 21:38:07.015 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 21:47:32.876 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 21:47:52.137 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 21:51:04.869 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 21:51:22.983 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 22:00:22.011 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 22:06:08.649 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 22:06:43.473 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 22:07:22.370 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-05 22:07:40.950 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 22:28:37.666 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 22:28:55.194 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 22:29:16.401 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 22:29:31.389 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 23:10:18.182 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-05 23:10:35.666 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 23:11:39.017 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-05 23:13:54.102 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-05 23:14:29.844 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-05 23:14:47.234 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-05 23:37:46.449 +04:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [AspNetUsers] ADD CONSTRAINT [FK_AspNetUsers_AspNetRoles_identityRoleId] FOREIGN KEY ([identityRoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE;
+2024-01-05 23:40:07.081 +04:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [AspNetUsers] ADD CONSTRAINT [FK_AspNetUsers_AspNetRoles_identityRoleId] FOREIGN KEY ([identityRoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE;
+2024-01-05 23:40:23.293 +04:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [AspNetUsers] ADD CONSTRAINT [FK_AspNetUsers_AspNetRoles_identityRoleId] FOREIGN KEY ([identityRoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE;
+2024-01-05 23:40:51.368 +04:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [AspNetUsers] ADD CONSTRAINT [FK_AspNetUsers_AspNetRoles_identityRoleId] FOREIGN KEY ([identityRoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE;
+2024-01-05 23:44:35.170 +04:00 [WRN] The foreign key property 'IdentityUserRole<string>.UserId1' was created in shadow state because a conflicting property with the simple name 'UserId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+2024-01-05 23:44:43.835 +04:00 [WRN] The foreign key property 'IdentityUserRole<string>.UserId1' was created in shadow state because a conflicting property with the simple name 'UserId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+2024-01-05 23:44:43.994 +04:00 [WRN] The foreign key property 'IdentityUserRole<string>.UserId1' was created in shadow state because a conflicting property with the simple name 'UserId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+2024-01-05 23:44:50.995 +04:00 [WRN] The foreign key property 'IdentityUserRole<string>.UserId1' was created in shadow state because a conflicting property with the simple name 'UserId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+2024-01-05 23:44:51.213 +04:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [AspNetUsers] ADD CONSTRAINT [FK_AspNetUsers_AspNetRoles_identityRoleId] FOREIGN KEY ([identityRoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE;

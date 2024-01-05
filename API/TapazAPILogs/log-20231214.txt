@@ -1,0 +1,9 @@
+2023-12-14 20:52:43.122 +04:00 [INF] AccountController.Login({"Email":"heqiqet@gmail.com","Password":"Rufat123"}
+2023-12-14 20:53:04.527 +04:00 [INF] ProductController.GetMyProducts()
+2023-12-14 21:13:57.130 +04:00 [INF] AccountController.Login({"Email":"heqiqet@gmail.com","Password":"Rufat123"}
+2023-12-14 21:14:23.426 +04:00 [INF] ProductController.DeleteProduct({"Id":7})
+2023-12-14 21:15:18.721 +04:00 [INF] ProductController.DeleteProduct({"Id":6})
+2023-12-14 21:19:47.438 +04:00 [INF] AccountController.Login({"Email":"heqiqet@gmail.com","Password":"Rufat123"}
+2023-12-14 21:20:09.327 +04:00 [INF] ProductController.DeleteProduct({"Id":6})
+2023-12-14 21:32:03.377 +04:00 [INF] AccountController.Login({"Email":"heqiqet@gmail.com","Password":"Rufat123"}
+2023-12-14 21:32:43.356 +04:00 [INF] ProductController.DeleteProduct({"Id":6})

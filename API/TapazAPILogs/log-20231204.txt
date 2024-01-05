@@ -1,0 +1,7 @@
+2023-12-04 21:36:16.233 +04:00 [INF] CategoryController.GetAllCategory()
+2023-12-04 21:37:33.346 +04:00 [INF] LocationController.GetAllLocation()
+2023-12-04 21:39:56.663 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2023-12-04 21:40:38.432 +04:00 [INF] ProductController.CreateProduct(DTO.ProductDto_s.ProductAddDto)
+2023-12-04 21:40:44.275 +04:00 [INF] ProductController.GetALlProducts()
+2023-12-04 21:41:42.756 +04:00 [INF] ProductController.GetALlProducts()
+2023-12-04 21:41:57.012 +04:00 [INF] ProductController.GetProduct()

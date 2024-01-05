@@ -1,0 +1,20 @@
+2023-12-17 14:29:22.940 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2023-12-17 14:29:58.660 +04:00 [INF] ComplaintController.CreateComplaint({"ComplaintText":"Cox ugursuz bir cehd edilir magaza terefinden"})
+2023-12-17 14:50:00.272 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2023-12-17 14:50:24.642 +04:00 [INF] ComplaintController.GetComplaint(1)
+2023-12-17 14:50:59.774 +04:00 [INF] AccountController.Login({"Email":"heqiqet@gmail.com","Password":"Rufat123"}
+2023-12-17 14:51:15.192 +04:00 [INF] ComplaintController.GetComplaint(1)
+2023-12-17 15:03:09.626 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2023-12-17 15:03:28.236 +04:00 [INF] ComplaintController.GetComplaint(1)
+2023-12-17 15:13:47.632 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2023-12-17 15:14:10.987 +04:00 [INF] ComplaintController.CreateComplaint({"ComplaintText":"esfdsgsfd"})
+2023-12-17 15:14:17.176 +04:00 [INF] ComplaintController.GetComplaint(2)
+2023-12-17 15:14:29.221 +04:00 [INF] ComplaintController.GetAllComplaint()
+2023-12-17 15:14:56.250 +04:00 [INF] AccountController.Login({"Email":"heqiqet@gmail.com","Password":"Rufat123"}
+2023-12-17 15:15:17.076 +04:00 [INF] ComplaintController.CreateComplaint({"ComplaintText":"Cox pis proqramdi"})
+2023-12-17 15:15:20.960 +04:00 [INF] ComplaintController.GetComplaint(3)
+2023-12-17 15:15:24.421 +04:00 [INF] ComplaintController.GetComplaint(2)
+2023-12-17 15:15:29.234 +04:00 [INF] ComplaintController.GetAllComplaint()
+2023-12-17 15:23:20.924 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2023-12-17 15:23:46.989 +04:00 [INF] ComplaintController.DeleteComplaint({"Id":2})
+2023-12-17 15:24:00.188 +04:00 [INF] ComplaintController.DeleteComplaint({"Id":3})
