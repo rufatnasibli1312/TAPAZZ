@@ -16,6 +16,8 @@ namespace BLL.Persistence.Service.Abstract
     {
         Task AddAsync(CategoryToAddDto categoryDto);
         Task<CategoryFindIdDTO> GetAsync(int id);
+        Task<List<FindParentsCategoryDto>> FindParentCategory();
+        Task<List<GetChildCategoryWithParentCategoryId>> GetChildCategoryWithParentCategoryId(int id);
         Task<List<CategoryToListDto>> GetAllAsync();
         Task Delete(DeleteCategoryDTO entity);
         Task UpdateAsync(UpdateCategoryDto categoryDto);

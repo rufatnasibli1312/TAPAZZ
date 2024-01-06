@@ -1,4 +1,5 @@
 ﻿using BLL.Persistence.Service.Abstract;
+using DAL.Filter.ActionFilter;
 using DTO.AccountDto_s;
 using DTO.CategoryDto_s;
 using DTO.ComplaintDto_s;
@@ -17,9 +18,9 @@ using Validation.UserValidator;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-
+    [ServiceFilter(typeof(StandardizeResponseFilter))]
     public class CategoryController : ControllerBase
     {
         public ICategoryService _service { get; }
@@ -27,37 +28,8 @@ namespace API.Controllers
         {
             _service = service;
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateCategory(CategoryToAddDto categoryToAdd)
-        {
 
-            var model = JsonSerializer.Serialize(categoryToAdd);
-            Log.Information($"{nameof(CategoryController)}.{nameof(CreateCategory)}({model})");
-            CategoryToAddValidator validator = new CategoryToAddValidator();
-            var result = validator.Validate(categoryToAdd);
-            var error = result.Errors.Select(m => m.ErrorMessage).ToList();
-            if (result.IsValid)
-            {
-                try
-                {
-                    await _service.AddAsync(categoryToAdd);
-                    return Ok();
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"{nameof(CategoryController)}.{nameof(CreateCategory)}({model})");
-                    return BadRequest(ex.Message);
-                }
-            }
-            Log.Error($"{nameof(CategoryController)}.{nameof(CreateCategory)}({model})");
-            return BadRequest(error);
-
-
-
-
-
-        }
-        [HttpGet("{id}")]
+        [HttpGet]
         public async Task<IActionResult> GetCategory(int id)
         {
             Log.Information($"{nameof(CategoryController)}.{nameof(GetCategory)}({id})");
@@ -79,15 +51,14 @@ namespace API.Controllers
 
         }
 
+
         [HttpGet]
-        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllCategory()
         {
             Log.Information($"{nameof(CategoryController)}.{nameof(GetAllCategory)}()");
             try
             {
-                var isAdmin = User.IsInRole("Admin");
-                //var userRoles = User.FindAll(ClaimTypes.Role).Select(r => r.Value);
+
 
                 var category = await _service.GetAllAsync();
                 if (category == null)
@@ -104,78 +75,49 @@ namespace API.Controllers
             }
 
         }
-
-        [HttpPut]
-        public async Task<IActionResult> UpdateCategory(UpdateCategoryDto categoryToUpdate)
+        [HttpGet]
+        public async Task<IActionResult> FindParentCategory()
         {
-            var model = JsonSerializer.Serialize(categoryToUpdate);
-            Log.Information($"{nameof(CategoryController)}.{nameof(UpdateCategory)}({model})");
-            UpdateCategoryValidator validator = new UpdateCategoryValidator();
-            var result = validator.Validate(categoryToUpdate);
-            var error = result.Errors.Select(m => m.ErrorMessage).ToList();
-            if (result.IsValid)
+            Log.Information($"{nameof(CategoryController)}.{nameof(FindParentCategory)}()");
+            try
             {
-                try
+                var category = await _service.FindParentCategory();
+                if (category == null)
                 {
-                    if (categoryToUpdate == null)
-                    {
-                        return BadRequest();
-                    }
-
-                    await _service.UpdateAsync(categoryToUpdate);
-                    return Ok(categoryToUpdate);
+                    return NotFound();
                 }
-                catch (Exception ex)
-                {
-                    Log.Error($"{nameof(CategoryController)}.{nameof(UpdateCategory)}({model})");
-                    return BadRequest(ex.Message);
-                }
-
+                return Ok(category);
             }
-            Log.Error($"{nameof(CategoryController)}.{nameof(UpdateCategory)}({model})");
-            return BadRequest(error);
-
-
-
-
-
-
-
+            catch (Exception ex)
+            {
+                Log.Error($"{nameof(CategoryController)}.{nameof(FindParentCategory)}()");
+                return BadRequest(ex.Message);
+            }
         }
-        [HttpDelete]
-        public async Task<IActionResult> DeleteCategory(DeleteCategoryDTO entity)
+        [HttpGet]
+        public async Task<IActionResult> GetChildCategoryWithParentCategoryId(int id)
         {
-            var model = JsonSerializer.Serialize(entity);
-            Log.Information($"{nameof(CategoryController)}.{nameof(DeleteCategory)}({model})");
-            DeleteCategoryValidator validator = new DeleteCategoryValidator();
-            var result = validator.Validate(entity);
-            var error = result.Errors.Select(m => m.ErrorMessage).ToList();
-            if (result.IsValid)
+            Log.Information($"{nameof(CategoryController)}.{nameof(GetChildCategoryWithParentCategoryId)}()");
+            try
             {
-                try
+                var category = await _service.GetChildCategoryWithParentCategoryId(id);
+                if (category == null)
                 {
-                    var existingCategory = await _service.GetAsync(entity.Id);
-                    if (existingCategory == null)
-                    {
-                        return NotFound();
-                    }
-                    await _service.Delete(entity);
-                    return NoContent();
+                    return NotFound();
                 }
-                catch (Exception ex)
-                {
-                    Log.Error($"{nameof(CategoryController)}.{nameof(DeleteCategory)}({model})");
-                    return BadRequest(ex.Message);
-                }
+                return Ok(category);
             }
-            Log.Error($"{nameof(CategoryController)}.{nameof(DeleteCategory)}({model})");
-            return BadRequest(error);
-
-
-
-
-
+            catch (Exception ex)
+            {
+                Log.Error($"{nameof(CategoryController)}.{nameof(GetChildCategoryWithParentCategoryId)}()");
+                return BadRequest(ex.Message);
+            }
         }
+
+
+
+
+
 
     }
 }

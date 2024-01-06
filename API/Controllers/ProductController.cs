@@ -1,4 +1,5 @@
 ﻿using BLL.Persistence.Service.Abstraction;
+using DAL.Filter.ActionFilter;
 using DTO.LocationDto_s;
 using DTO.ProductDto_s;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,7 +14,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    [ServiceFilter(typeof(StandardizeResponseFilter))]
     public class ProductController : ControllerBase
     {
         public IProductService _productService { get; }

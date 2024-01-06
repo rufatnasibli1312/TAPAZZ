@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLL.Persistence.Service.Abstraction;
 using BLL.ServiceExtensions;
+using DAL.Data;
 using DAL.Persistence.Repository.Abstraction;
 using DTO.LocationDto_s;
 using DTO.ProductDto_s;
@@ -8,6 +9,7 @@ using Entity.Entities;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -25,12 +27,18 @@ namespace BLL.Persistence.Service.Implementation
         public IProductRepository _productRepository { get; }
         public IMapper _mapper { get; }
         public JwtTokenExtractor _jwtTokenExtractor { get; }
+        public IAccountService _accountService { get; }
+        public FindUserRole _findUserRole { get; }
+        public MyDbContext _dbContext { get; }
 
-        public ProductService(IProductRepository productRepository, IMapper mapper, JwtTokenExtractor jwtTokenExtractor)
+        public ProductService(IProductRepository productRepository, IMapper mapper, JwtTokenExtractor jwtTokenExtractor, IAccountService accountService, FindUserRole findUserRole,MyDbContext dbContext)
         {
             _productRepository = productRepository;
             _mapper = mapper;
             _jwtTokenExtractor = jwtTokenExtractor;
+            _accountService = accountService;
+            _findUserRole = findUserRole;
+            _dbContext = dbContext;
         }
 
 
@@ -58,7 +66,20 @@ namespace BLL.Persistence.Service.Implementation
         public async Task<List<ProductToListDto>> GetAllAsync()
         {
             List<Product> products = await _productRepository.GetAllAsync();
-            List<ProductToListDto> result = _mapper.Map<List<ProductToListDto>>(products);
+            var result = new List<ProductToListDto>();
+
+            foreach (var product in products)
+            {
+                if (product.ExpireDate > DateTime.Now)
+                {
+                    product.IsActive = true;
+                    var productDto = _mapper.Map<ProductToListDto>(product);
+                    result.Add(productDto);
+                }
+            }
+
+            await _dbContext.SaveChangesAsync();
+
             return result;
 
         }
@@ -88,7 +109,9 @@ namespace BLL.Persistence.Service.Implementation
             if (product != null)
             {
                 var userId = _jwtTokenExtractor.GetUserIdFromJwtToken();
-                if (product.UserID == userId)
+                var user  = await _accountService.FindUserById(userId);
+                var userRole = await _findUserRole.GetUserRole(user);
+                if (product.UserID == userId || userRole == "Admin")
                 {
                     await _productRepository.Delete(product);
                     return true;
@@ -135,6 +158,7 @@ namespace BLL.Persistence.Service.Implementation
                 await _productRepository.UpdateAsync(existingProduct);
             }
         }
+
        
     }
 }

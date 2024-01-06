@@ -1,4 +1,5 @@
 ﻿using BLL.Persistence.Service.Abstraction;
+using DAL.Filter.ActionFilter;
 using DTO;
 using DTO.AccountDto_s;
 using DTO.ComplaintDto_s;
@@ -16,6 +17,7 @@ namespace API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+    [ServiceFilter(typeof(StandardizeResponseFilter))]
     public class ComplaintController : ControllerBase
     {
         public IComplaintService _service { get; }
@@ -23,8 +25,9 @@ namespace API.Controllers
         {
             _service = service;
         }
-        [HttpPost]
 
+      
+        [HttpPost]
         public async Task<IActionResult> CreateComplaint(ComplaintAddDto complaintAddDto)
         {
             var model = JsonSerializer.Serialize(complaintAddDto);
@@ -50,8 +53,8 @@ namespace API.Controllers
             return BadRequest(error);
 
         }
+       
         [HttpGet]
-
         public async Task<IActionResult> GetComplaint(int id)
         {
             Log.Information($"{nameof(ComplaintController)}.{nameof(GetComplaint)}({id})");
@@ -94,7 +97,6 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
-
         public async Task<IActionResult> DeleteComplaint(DeleteComplaintDto entity)
         {
             var model = JsonSerializer.Serialize(entity);

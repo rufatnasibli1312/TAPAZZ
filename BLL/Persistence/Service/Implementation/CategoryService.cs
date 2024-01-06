@@ -96,6 +96,52 @@ namespace BLL.Persistence.Service.Concrete
 
         }
 
+        public async Task<List<FindParentsCategoryDto>> FindParentCategory()
+        {
+            List<Category> categories = await _repository.GetAllAsync();
+            var result = new List<FindParentsCategoryDto>();
+            foreach (var category in categories)
+            {
+                if (category.ParentCategory == null)
+                {
+                    var categoryDto = new FindParentsCategoryDto
+                    {
+                        Id = category.Id,
+                        Name = category.Name
+                    };
 
+                    result.Add(categoryDto);
+                }
+            }
+
+            return result;
+
+
+
+
+        }
+
+        public async Task<List<GetChildCategoryWithParentCategoryId>> GetChildCategoryWithParentCategoryId(int id)
+        {
+            var categories = await _repository.GetAllAsync();
+            var result = new List<GetChildCategoryWithParentCategoryId>();
+
+            foreach (var category in categories)
+            {
+                if (category.ParentCategoryId == id)
+                {
+                    var categoryDto = new GetChildCategoryWithParentCategoryId
+                    {
+                        Id = category.Id,
+                        Name = category.Name
+                    };
+                    result.Add(categoryDto);
+                }
+            }
+
+            return result;
+        }
+
+        
     }
 }

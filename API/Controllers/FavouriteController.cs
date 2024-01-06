@@ -1,4 +1,5 @@
 ﻿using BLL.Persistence.Service.Abstraction;
+using DAL.Filter.ActionFilter;
 using DTO;
 using DTO.ComplaintDto_s;
 using DTO.FavouriteDto_s;
@@ -13,6 +14,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ServiceFilter(typeof(StandardizeResponseFilter))]
     public class FavouriteController : ControllerBase
     {
         public IFavouriteService _favouriteService { get; }

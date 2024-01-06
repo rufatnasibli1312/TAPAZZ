@@ -2,3 +2,86 @@
 ALTER TABLE [AspNetUsers] ADD CONSTRAINT [FK_AspNetUsers_AspNetRoles_identityRoleId] FOREIGN KEY ([identityRoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE;
 2024-01-06 00:10:41.449 +04:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
 ALTER TABLE [AspNetUsers] ADD CONSTRAINT [FK_AspNetUsers_AspNetRoles_identityRoleId] FOREIGN KEY ([identityRoleId]) REFERENCES [AspNetRoles] ([Id]) ON DELETE CASCADE;
+2024-01-06 00:33:51.067 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-06 00:34:43.435 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-06 00:37:55.502 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-06 02:05:15.102 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-06 02:06:04.423 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-06 02:06:37.483 +04:00 [INF] AccountController.Login({"Email":"reshad@gmail.com","Password":"Rufat123"}
+2024-01-06 14:36:28.375 +04:00 [INF] AccountController.Login({"Email":"RESHAD@GMAIL.COM","Password":"Rufat123"}
+2024-01-06 14:37:08.932 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-06 14:37:32.089 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-06 14:41:53.798 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-06 14:59:00.787 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-06 14:59:27.367 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-06 15:01:42.843 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-06 15:02:15.129 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-06 15:07:30.273 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-06 15:15:26.703 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-06 15:16:02.383 +04:00 [INF] ProductController.DeleteProduct({"Id":9})
+2024-01-06 15:35:49.604 +04:00 [INF] CategoryController.FindParentCategory()
+2024-01-06 15:36:44.338 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-06 15:45:51.354 +04:00 [INF] CategoryController.GetChildCategoryWithParentCategoryId()
+2024-01-06 15:46:56.372 +04:00 [INF] CategoryController.GetChildCategoryWithParentCategoryId()
+2024-01-06 15:47:34.122 +04:00 [INF] CategoryController.GetChildCategoryWithParentCategoryId()
+2024-01-06 15:48:44.093 +04:00 [INF] LocationController.GetLocation(27)
+2024-01-06 15:48:48.680 +04:00 [INF] LocationController.GetAllLocation()
+2024-01-06 15:54:40.998 +04:00 [INF] ProductController.GetALlProducts()
+2024-01-06 15:56:48.434 +04:00 [INF] AccountController.Login({"Email":"rufatnasibli1312@gmail.com","Password":"Rufat123"}
+2024-01-06 15:57:26.764 +04:00 [INF] ProductController.GetALlProducts()
+2024-01-06 15:58:42.063 +04:00 [INF] ProductController.GetALlProducts()
+2024-01-06 16:01:49.419 +04:00 [INF] ProductController.GetALlProducts()
+2024-01-06 17:16:20.076 +04:00 [INF] LocationController.GetAllLocation()
+2024-01-06 17:27:12.472 +04:00 [INF] LocationController.GetAllLocation()
+2024-01-06 17:28:13.103 +04:00 [INF] LocationController.GetLocation(26)
+2024-01-06 17:30:52.592 +04:00 [INF] LocationController.GetLocation(5)
+2024-01-06 17:31:46.427 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-06 17:32:12.830 +04:00 [INF] CategoryController.GetAllCategory()
+2024-01-06 17:33:50.781 +04:00 [INF] ProductController.GetALlProducts()
+2024-01-06 17:34:00.001 +04:00 [INF] ProductController.GetProduct(10)
+2024-01-06 17:34:06.364 +04:00 [INF] ProductController.GetProduct(100)
+2024-01-06 17:49:15.034 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.IO.FileNotFoundException: Could not load file or assembly 'Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'. The system cannot find the file specified.
+File name: 'Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'
+   at BLL.GlobalExceptionHandling.ExceptionMiddleware.Invoke(HttpContext context)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at BLL.GlobalExceptionHandling.ExceptionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-01-06 17:49:29.981 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.IO.FileNotFoundException: Could not load file or assembly 'Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'. The system cannot find the file specified.
+File name: 'Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'
+   at BLL.GlobalExceptionHandling.ExceptionMiddleware.Invoke(HttpContext context)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at BLL.GlobalExceptionHandling.ExceptionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-01-06 17:50:14.771 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.IO.FileNotFoundException: Could not load file or assembly 'Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'. The system cannot find the file specified.
+File name: 'Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'
+   at BLL.GlobalExceptionHandling.ExceptionMiddleware.Invoke(HttpContext context)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at BLL.GlobalExceptionHandling.ExceptionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-01-06 17:51:11.869 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.IO.FileNotFoundException: Could not load file or assembly 'Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'. The system cannot find the file specified.
+File name: 'Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'
+   at BLL.GlobalExceptionHandling.ExceptionMiddleware.Invoke(HttpContext context)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at BLL.GlobalExceptionHandling.ExceptionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-01-06 17:52:03.159 +04:00 [INF] LocationController.GetAllLocation()

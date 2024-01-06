@@ -1,4 +1,5 @@
 ﻿using BLL.Persistence.Service.Abstraction;
+using DAL.Filter.ActionFilter;
 using DTO.AccountDto_s;
 using DTO.JWTDto_s;
 using DTO.LocationDto_s;
@@ -19,6 +20,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [ServiceFilter(typeof(StandardizeResponseFilter))]
     public class AccountController : ControllerBase
     {
         public IAccountService _accountService { get; }

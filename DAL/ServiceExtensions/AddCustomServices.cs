@@ -1,4 +1,5 @@
 ﻿using DAL.Data;
+using DAL.Filter.ActionFilter;
 using DAL.Persistence.Repository.Abstract;
 using DAL.Persistence.Repository.Abstraction;
 using DAL.Persistence.Repository.Concrete;
@@ -26,7 +27,7 @@ namespace DAL.ServiceExtensions
 
             services.AddDbContext<MyDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("Default")));
-
+            services.AddScoped<StandardizeResponseFilter>();
 
 
 

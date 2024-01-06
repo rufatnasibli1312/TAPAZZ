@@ -35,7 +35,7 @@ namespace BLL.ServiceExtensions
             services.AddScoped<IFavouriteService,FavouriteService>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<JwtTokenExtractor>();
-           
+            services.AddScoped<FindUserRole>();
 
 
         }

@@ -1,4 +1,5 @@
 ﻿using BLL.Persistence.Service.Abstract;
+using DAL.Filter.ActionFilter;
 using DTO.CategoryDto_s;
 using DTO.LocationDto_s;
 
@@ -15,6 +16,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ServiceFilter(typeof(StandardizeResponseFilter))]
     public class LocationController : ControllerBase
     {
         public ILocationService _service { get; }
@@ -22,34 +24,7 @@ namespace API.Controllers
         {
             _service = service;
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateLocation(LocationtoAddDTO locationToAddDto)
-        {
-            var model = JsonSerializer.Serialize(locationToAddDto);
-            Log.Information($"{nameof(LocationController)}.{nameof(CreateLocation)}({model})");
-            LocationtoAddValidator validator = new LocationtoAddValidator();
-            var result = validator.Validate(locationToAddDto);
-            var error = result.Errors.Select(m => m.ErrorMessage).ToList();
-            if (result.IsValid)
-            {
-                try
-                {
 
-                    await _service.AddAsync(locationToAddDto);
-                    return Ok();
-                }
-                catch (Exception ex)
-                {
-
-                    Log.Error($"{nameof(LocationController)}.{nameof(CreateLocation)}({model})");
-                    return BadRequest(ex.Message);
-                }
-            }
-            Log.Error($"{nameof(LocationController)}.{nameof(CreateLocation)}({model})");
-            return BadRequest(error);
-          
-
-        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetLocation(int id)
         {
@@ -95,8 +70,8 @@ namespace API.Controllers
         [HttpGet("GetProductsWithLocationId")]
         public async Task<IActionResult> GetProductsWithLocationId(int id)
         {
-           var products =  await _service.GetProductsWithLocationId(id);
-            if(products == null)
+            var products = await _service.GetProductsWithLocationId(id);
+            if (products == null)
             {
                 return BadRequest();
             }
@@ -104,70 +79,6 @@ namespace API.Controllers
         }
 
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateLocation(LocationToUpdateDTO locationToUpdate)
-        {
-            var model = JsonSerializer.Serialize(locationToUpdate);
-            Log.Information($"{nameof(LocationController)}.{nameof(UpdateLocation)}({model})");
-            LocationToUpdateValidator validator = new LocationToUpdateValidator();
-            var result = validator.Validate(locationToUpdate);
-            var error = result.Errors.Select(m => m.ErrorMessage).ToList();
-            if (result.IsValid)
-            {
-                try
-                {
-                    if (locationToUpdate == null)
-                    {
-                        return BadRequest();
-                    }
-
-                    await _service.UpdateAsync(locationToUpdate);
-                    return Ok(locationToUpdate);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"{nameof(LocationController)}.{nameof(UpdateLocation)}({model})");
-                    return BadRequest(ex.Message);
-                }
-            }
-            Log.Error($"{nameof(LocationController)}.{nameof(UpdateLocation)}({model})");
-            return BadRequest(error);
-
-
-          
-
-        }
-        [HttpDelete]
-        public async Task<IActionResult> DeleteLocation(DeleteLocationDto entity)
-        {
-            var model = JsonSerializer.Serialize(entity);
-            Log.Information($"{nameof(LocationController)}.{nameof(DeleteLocation)}({model})");
-            DeleteLocationValidation validator = new DeleteLocationValidation();
-            var result = validator.Validate(entity);
-            var error = result.Errors.Select(m => m.ErrorMessage).ToList();
-            if(result.IsValid)
-            {
-                try
-                {
-                    var existingLocation = await _service.GetAsync(entity.Id);
-                    if (existingLocation == null)
-                    {
-                        return NotFound();
-                    }
-                    await _service.Delete(entity);
-                    return NoContent();
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"{nameof(LocationController)}.{nameof(DeleteLocation)}({model})");
-                    return BadRequest(ex.Message);
-                }
-            }
-            Log.Error($"{nameof(LocationController)}.{nameof(DeleteLocation)}({model})");
-            return BadRequest(error);
-         
-
-        }
 
 
 

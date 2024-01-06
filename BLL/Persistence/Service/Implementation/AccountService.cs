@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -30,7 +31,9 @@ namespace BLL.Persistence.Service.Implementation
         public SignInManager<User> _signInManager { get; }
         public JwtTokenExtractor _jwtTokenExtractor { get; }
 
-        public AccountService(IAccountRepository accountRepository, IMapper mapper, IConfiguration configuration, SignInManager<User> signInManager, JwtTokenExtractor jwtTokenExtractor)
+        public FindUserRole _findUserRole { get; }
+
+        public AccountService(IAccountRepository accountRepository, IMapper mapper, IConfiguration configuration, SignInManager<User> signInManager, JwtTokenExtractor jwtTokenExtractor, FindUserRole findUserRole)
         {
             _accountRepository = accountRepository;
 
@@ -38,6 +41,8 @@ namespace BLL.Persistence.Service.Implementation
             _configuration = configuration;
             _signInManager = signInManager;
             _jwtTokenExtractor = jwtTokenExtractor;
+
+            _findUserRole = findUserRole;
         }
 
 
@@ -80,12 +85,17 @@ namespace BLL.Persistence.Service.Implementation
 
             var checkPassword = _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
+            //find user role and seng in generate token
+            var role = await _findUserRole.GetUserRole(user);
+
             var tokens = JwtHelper.GenerateToken(_configuration, new List<System.Security.Claims.Claim>
             {
                 new System.Security.Claims.Claim("Email", loginDto.Email),
                 new System.Security.Claims.Claim("Id", user.Id),
-                new System.Security.Claims.Claim("Fullname", user.Fullname)
-                
+                new System.Security.Claims.Claim("Fullname", user.Fullname),
+                new System.Security.Claims.Claim(ClaimTypes.Role,role)
+
+
 
 
             });
@@ -127,6 +137,7 @@ namespace BLL.Persistence.Service.Implementation
 
 
         }
+
 
     }
 }

@@ -1,3 +1,4 @@
+
 using BLL.Mapper;
 using BLL.Persistence.Service.Abstract;
 using BLL.Persistence.Service.Abstraction;
@@ -5,6 +6,7 @@ using BLL.Persistence.Service.Concrete;
 using BLL.Persistence.Service.Implementation;
 using BLL.ServiceExtensions;
 using DAL.Data;
+using DAL.Filter.ActionFilter;
 using DAL.Persistence.Repository.Abstract;
 using DAL.Persistence.Repository.Abstraction;
 using DAL.Persistence.Repository.Concrete;
@@ -167,6 +169,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 
 
 app.UseAuthentication();
