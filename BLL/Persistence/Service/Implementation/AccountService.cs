@@ -9,7 +9,9 @@ using DTO.JWTDto_s;
 using DTO.ProductDto_s;
 using Entity.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -62,7 +64,7 @@ namespace BLL.Persistence.Service.Implementation
             user.PhotoPath = name;
             user.PhotoName = fileName;
 
-
+           
 
             var data = await _accountRepository.RegisterUserAsync(user, model.Password);
             if (data.Succeeded)
@@ -85,7 +87,7 @@ namespace BLL.Persistence.Service.Implementation
 
             var checkPassword = _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
-            //find user role and seng in generate token
+            
             var role = await _findUserRole.GetUserRole(user);
 
             var tokens = JwtHelper.GenerateToken(_configuration, new List<System.Security.Claims.Claim>
@@ -138,6 +140,41 @@ namespace BLL.Persistence.Service.Implementation
 
         }
 
+        public async Task<bool> DeleteAsync(DeleteUserDto deleteUserDto)
+        {
+            var UserId = _jwtTokenExtractor.GetUserIdFromJwtToken();
+           
+            var LoginUser = await _accountRepository.FindUserById(UserId);
+            var userRole = await _findUserRole.GetUserRole(LoginUser);
+            if (userRole == "User")
+            {
+                if (UserId == deleteUserDto.Id)
+                {
+                    await _accountRepository.RemoveUser(LoginUser);
+                    await _accountRepository.SaveChanges();
+                    return true;
+                }
+            }
+            else if (userRole == "Admin")
+            {
+                if (UserId != deleteUserDto.Id)
+                {
+                    var user = await _accountRepository.FindUserById(deleteUserDto.Id);
+                    if(user != null)
+                    {
+                        await _accountRepository.RemoveUser(user);
+                        await _accountRepository.SaveChanges();
+                        return true;
+                    }
+                   
+                   
+                }
+            }
+            return false;
+            
 
+
+
+        }
     }
 }

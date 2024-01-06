@@ -15,9 +15,10 @@ namespace DAL.Data
 {
     public class MyDbContext : IdentityDbContext<User>
     {
-        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
+        private readonly IConfiguration _configuration;
+        public MyDbContext(DbContextOptions<MyDbContext> options, IConfiguration configuration) : base(options)
         {
-
+            _configuration = configuration;
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
@@ -245,10 +246,14 @@ namespace DAL.Data
                 new IdentityRole { Id = "2", Name = "User", NormalizedName = "USER" }
 
                 );
+                var roleId = _configuration["SeedData:RoleId"];
+                var userId = _configuration["SeedData:UserId"];
+
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string> { RoleId = "1", UserId = "0c120a61-e24c-4ff3-a106-89156a6afd7d" }
+                new IdentityUserRole<string> { RoleId = roleId, UserId = userId }
 
                 );
+
 
 
         }

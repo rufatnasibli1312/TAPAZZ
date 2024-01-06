@@ -16,6 +16,8 @@ namespace DAL.Persistence.Repository.Abstraction
         Task SaveChanges();
         Task<IdentityResult> AddRoleAsync(User user);
 
+        Task RemoveUser(User user);
+
 
 
 

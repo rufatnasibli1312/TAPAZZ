@@ -35,7 +35,7 @@ namespace DAL.Persistence.Repository.Implementation
 
         public async Task<User> FindUserById(string Id)
         {
-            return await _userManager.FindByIdAsync(Id);   
+            return await _userManager.FindByIdAsync(Id);
         }
 
         public async Task<User> FindUserByEmail(string Email)
@@ -44,7 +44,11 @@ namespace DAL.Persistence.Repository.Implementation
         }
         public async Task SaveChanges()
         {
-           await  _context.SaveChangesAsync();
-        } 
+            await _context.SaveChangesAsync();
+        }
+        public async Task RemoveUser(User user)
+        {
+            await _userManager.DeleteAsync(user);
+        }
     }
 }

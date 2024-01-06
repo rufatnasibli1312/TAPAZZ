@@ -4,7 +4,6 @@ using DTO.AccountDto_s;
 using DTO.JWTDto_s;
 using DTO.LocationDto_s;
 using Entity.Entities;
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -132,7 +131,7 @@ namespace API.Controllers
             var jsonModel = JsonSerializer.Serialize(loginDto);
             Log.Information($"{nameof(AccountController)}.{nameof(Login)}({jsonModel}");
             LoginValidator validator = new LoginValidator();
-            var result =  validator.Validate(loginDto);
+            var result = validator.Validate(loginDto);
             var error = result.Errors.Select(m => m.ErrorMessage).ToList();
             if (result.IsValid)
             {
@@ -184,6 +183,30 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+        [Authorize]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser(DeleteUserDto dto)
+        {
+            var model = JsonSerializer.Serialize(dto);
+            Log.Information($"{nameof(AccountController)}.{nameof(DeleteUser)}({model})");
+            try
+            {
+                var result = await _accountService.DeleteAsync(dto);
+                if (result)
+                {
+                    return Ok(result);
+
+                }
+                return BadRequest(result);
+
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{nameof(AccountController)}.{nameof(DeleteUser)}({model})");
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

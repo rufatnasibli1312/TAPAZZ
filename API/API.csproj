@@ -32,7 +32,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\ProductPhoto\" />
-    <Folder Include="wwwroot\ProfilePhoto\" />
   </ItemGroup>
 
 </Project>

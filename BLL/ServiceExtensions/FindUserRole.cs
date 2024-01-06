@@ -21,16 +21,20 @@ namespace BLL.ServiceExtensions
 
         public async Task<string> GetUserRole(User user)
         {
-
+            
             var userRole = await _userManager.GetRolesAsync(user);
-
-
-            if (userRole != null && userRole.Any())
+            if(userRole == null)
             {
-                return userRole.First();
+                return null;
             }
-            return "User";
 
+            return userRole.First();
+
+
+
+
+            
+           
         }
 
 
