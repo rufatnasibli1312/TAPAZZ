@@ -16,7 +16,7 @@ namespace Validation.CategoryValidator
            .NotEmpty().WithMessage("Category name cannot be empty")
            .MaximumLength(50).WithMessage("Category name cannot exceed 50 characters");
 
-            RuleFor(m => m.ParentCategoryId)
+            RuleFor(m => m.ParentCategoryId).NotNull().WithMessage("ParentCategoryId cannot null").NotEqual(0)
                 .GreaterThanOrEqualTo(0).WithMessage("ParentCategoryId must be greater than or equal to 0");
         }
     }

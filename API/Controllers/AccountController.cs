@@ -172,10 +172,11 @@ namespace API.Controllers
             {
                 if (entity == null)
                 {
-                    return BadRequest();
+                    return BadRequest();           //vaxt olsa buralarada validator yazarsan
                 }
                 await _accountService.UpdateAsync(entity, _webHostEnvironment.WebRootPath);
                 return Ok(entity);
+               
             }
             catch (Exception ex)
             {

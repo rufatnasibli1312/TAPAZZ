@@ -18,8 +18,10 @@ namespace Validation.CategoryValidator
           .MaximumLength(50).WithMessage("Category name cannot exceed 50 characters");
 
             RuleFor(m => m.ParentCategoryId)
-                .GreaterThanOrEqualTo(0).WithMessage("ParentCategoryId must be greater than or equal to 0");
-            RuleFor(m => m.Id)
+     .NotNull().WithMessage("ParentCategoryId must not be null")
+     .NotEqual(0).WithMessage("ParentCategoryId must be greater than 0");
+
+            RuleFor(m => m.Id).NotNull().WithMessage("CategoryId must not be null").NotEqual(0)
                 .GreaterThanOrEqualTo(0).WithMessage("Id must be greater than or equal to 0");
         }
     }

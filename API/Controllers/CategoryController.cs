@@ -32,7 +32,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCategory(int id)
         {
-            Log.Information($"{nameof(CategoryController)}.{nameof(GetCategory)}({id})");
+
             try
             {
                 var category = await _service.GetAsync(id);
@@ -45,7 +45,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error($"{nameof(CategoryController)}.{nameof(GetCategory)}({id})");
+                
                 return BadRequest(ex.Message);
             }
 
@@ -54,8 +54,7 @@ namespace API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAllCategory()
-        {
-            Log.Information($"{nameof(CategoryController)}.{nameof(GetAllCategory)}()");
+        { 
             try
             {
 
@@ -70,15 +69,15 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error($"{nameof(CategoryController)}.{nameof(GetAllCategory)}()");
+               
                 return BadRequest(ex.Message);
             }
 
         }
         [HttpGet]
-        public async Task<IActionResult> FindParentCategory()
+        public async Task<IActionResult> FindAllParentCategory()
         {
-            Log.Information($"{nameof(CategoryController)}.{nameof(FindParentCategory)}()");
+            
             try
             {
                 var category = await _service.FindParentCategory();
@@ -90,18 +89,18 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error($"{nameof(CategoryController)}.{nameof(FindParentCategory)}()");
+               
                 return BadRequest(ex.Message);
             }
         }
         [HttpGet]
         public async Task<IActionResult> GetChildCategoryWithParentCategoryId(int id)
         {
-            Log.Information($"{nameof(CategoryController)}.{nameof(GetChildCategoryWithParentCategoryId)}()");
+           
             try
             {
                 var category = await _service.GetChildCategoryWithParentCategoryId(id);
-                if (category == null)
+                if (category.Count == 0)
                 {
                     return NotFound();
                 }
@@ -109,7 +108,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error($"{nameof(CategoryController)}.{nameof(GetChildCategoryWithParentCategoryId)}()");
+               
                 return BadRequest(ex.Message);
             }
         }

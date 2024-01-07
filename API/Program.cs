@@ -35,6 +35,8 @@ builder.Services.AddDALServices(builder.Configuration);
 builder.Services.AddBLLServices();
 builder.Services.AddValidatorServices();
 
+
+
 builder.Services.AddIdentity<User, IdentityRole>(op =>
 {
 
@@ -64,15 +66,6 @@ builder.Host.UseSerilog((context, configuration) =>
         return false;
     });
 });
-
-
-
-
-
-
-
-
-
 
 
 

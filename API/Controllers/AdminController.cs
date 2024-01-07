@@ -14,7 +14,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [ServiceFilter(typeof(StandardizeResponseFilter))]
     public class AdminController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace API.Controllers
         public ICategoryService _categoryservice { get; }
         public ILocationService _locationService { get; }
 
-        public AdminController(ICategoryService Categoryservice,ILocationService locationService)
+        public AdminController(ICategoryService Categoryservice, ILocationService locationService)
         {
             _categoryservice = Categoryservice;
             _locationService = locationService;
@@ -32,97 +32,64 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CategoryToAddDto categoryToAdd)
         {
-
-            var model = JsonSerializer.Serialize(categoryToAdd);
-            Log.Information($"{nameof(AdminController)}.{nameof(CreateCategory)}({model})");
-            CategoryToAddValidator validator = new CategoryToAddValidator();
-            var result = validator.Validate(categoryToAdd);
-            var error = result.Errors.Select(m => m.ErrorMessage).ToList();
-            if (result.IsValid)
+            try
             {
-                try
-                {
-                    await _categoryservice.AddAsync(categoryToAdd);
-                    return Ok();
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"{nameof(AdminController)}.{nameof(CreateCategory)}({model})");
-                    return BadRequest(ex.Message);
-                }
+                await _categoryservice.AddAsync(categoryToAdd);
+                return Ok();
             }
-            Log.Error($"{nameof(AdminController)}.{nameof(CreateCategory)}({model})");
-            return BadRequest(error);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
 
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateCategory(UpdateCategoryDto categoryToUpdate)
         {
-            var model = JsonSerializer.Serialize(categoryToUpdate);
-            Log.Information($"{nameof(AdminController)}.{nameof(UpdateCategory)}({model})");
-            UpdateCategoryValidator validator = new UpdateCategoryValidator();
-            var result = validator.Validate(categoryToUpdate);
-            var error = result.Errors.Select(m => m.ErrorMessage).ToList();
-            if (result.IsValid)
+
+            try
             {
-                try
-                {
-                    if (categoryToUpdate == null)
-                    {
-                        return BadRequest();
-                    }
 
-                    await _categoryservice.UpdateAsync(categoryToUpdate);
-                    return Ok(categoryToUpdate);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"{nameof(AdminController)}.{nameof(UpdateCategory)}({model})");
-                    return BadRequest(ex.Message);
-                }
+                await _categoryservice.UpdateAsync(categoryToUpdate);
 
+                return Ok(categoryToUpdate);
             }
-            Log.Error($"{nameof(AdminController)}.{nameof(UpdateCategory)}({model})");
-            return BadRequest(error);
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
 
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteCategory(DeleteCategoryDTO entity)
         {
-            var model = JsonSerializer.Serialize(entity);
-            Log.Information($"{nameof(CategoryController)}.{nameof(DeleteCategory)}({model})");
-            DeleteCategoryValidator validator = new DeleteCategoryValidator();
-            var result = validator.Validate(entity);
-            var error = result.Errors.Select(m => m.ErrorMessage).ToList();
-            if (result.IsValid)
+
             {
                 try
                 {
-                    var existingCategory = await _categoryservice.GetAsync(entity.Id);
-                    if (existingCategory == null)
-                    {
-                        return NotFound();
-                    }
                     await _categoryservice.Delete(entity);
                     return NoContent();
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"{nameof(CategoryController)}.{nameof(DeleteCategory)}({model})");
+
                     return BadRequest(ex.Message);
                 }
+
+
+
+
             }
-            Log.Error($"{nameof(CategoryController)}.{nameof(DeleteCategory)}({model})");
-            return BadRequest(error);
-
-
-
 
 
         }
         [HttpPost]
+
         public async Task<IActionResult> CreateLocation(LocationtoAddDTO locationToAddDto)
         {
             var model = JsonSerializer.Serialize(locationToAddDto);

@@ -10,7 +10,7 @@ namespace DTO.CategoryDto_s
     public class CategoryToAddDto
     {
         public string Name { get; set; }
-        public int? ParentCategoryId { get; set; }
+        public int ParentCategoryId { get; set; }
         
 
     }

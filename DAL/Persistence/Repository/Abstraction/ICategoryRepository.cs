@@ -10,6 +10,6 @@ namespace DAL.Persistence.Repository.Abstract
 {
     public interface ICategoryRepository  : IGenericRepository<Category>
     {
-       
+        Task<bool> FindIsItParentCategoryOrNot(int categoryId);
     }
 }

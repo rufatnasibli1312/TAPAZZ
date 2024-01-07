@@ -22,6 +22,8 @@ namespace BLL.Persistence.Service.Abstract
         Task Delete(DeleteCategoryDTO entity);
         Task UpdateAsync(UpdateCategoryDto categoryDto);
 
+        Task<bool> FindIsItParentCategoryOrNot(int categoryId);
+
 
 
 

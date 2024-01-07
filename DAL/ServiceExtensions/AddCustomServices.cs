@@ -28,6 +28,8 @@ namespace DAL.ServiceExtensions
             services.AddDbContext<MyDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("Default")));
             services.AddScoped<StandardizeResponseFilter>();
+          
+
 
 
 

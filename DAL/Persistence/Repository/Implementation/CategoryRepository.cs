@@ -19,6 +19,15 @@ namespace DAL.Persistence.Repository.Concrete
             _context = context;
         }
 
-      
+        public async Task<bool> FindIsItParentCategoryOrNot(int categoryId)
+        {
+            var category = await _context.Categories.FindAsync(categoryId);
+            if (category.ParentCategoryId == null)
+            {
+                return true;
+            }
+            return false;
+
+        }
     }
 }
