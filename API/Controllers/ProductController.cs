@@ -27,7 +27,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles ="User")]
         public async Task<IActionResult> CreateProduct([FromForm] ProductAddDto productAddDto)
         {
             var model = JsonSerializer.Serialize(productAddDto);
@@ -99,7 +99,7 @@ namespace API.Controllers
         }
 
         [HttpGet("UserId")]
-        [Authorize]
+        [Authorize(Roles ="User")]
         public async Task<IActionResult> GetMyProducts()
         {
             Log.Information($"{nameof(ProductController)}.{nameof(GetMyProducts)}()");
@@ -160,7 +160,7 @@ namespace API.Controllers
 
         }
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> UpdateProduct([FromForm] UpdateProductDto entity)
         {
             var model = JsonSerializer.Serialize(entity);
