@@ -29,7 +29,7 @@ namespace API.Controllers
         public async Task<IActionResult> GetLocation(int id)
         {
 
-            Log.Information($"{nameof(LocationController)}.{nameof(GetLocation)}({id})");
+
             try
             {
                 var location = await _service.GetAsync(id);
@@ -37,11 +37,12 @@ namespace API.Controllers
                 {
                     return NotFound();
                 }
+
                 return Ok(location);
             }
             catch (Exception ex)
             {
-                Log.Error($"{nameof(LocationController)}.{nameof(GetLocation)}({id})");
+
                 return BadRequest(ex.Message);
             }
 
@@ -50,14 +51,15 @@ namespace API.Controllers
         [HttpGet("GetAllLocation")]
         public async Task<IActionResult> GetAllLocation()
         {
-            Log.Information($"{nameof(LocationController)}.{nameof(GetAllLocation)}()");
+            
             try
             {
                 var locations = await _service.GetAllAsync();
-                if (locations == null)
+                if(locations == null)
                 {
                     return NotFound();
                 }
+               
                 return Ok(locations);
             }
             catch (Exception ex)
@@ -70,12 +72,20 @@ namespace API.Controllers
         [HttpGet("GetProductsWithLocationId")]
         public async Task<IActionResult> GetProductsWithLocationId(int id)
         {
-            var products = await _service.GetProductsWithLocationId(id);
-            if (products == null)
+            try
             {
-                return BadRequest();
+                var products = await _service.GetProductsWithLocationId(id);
+                if (products[0].Products.Count == 0)
+                {
+                    return NotFound();
+                }
+                return Ok(products);
             }
-            return Ok(products);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
         }
 
 

@@ -15,7 +15,8 @@ namespace Validation.LocationValidator
             RuleFor(location => location.Name)
             .NotEmpty().WithMessage("Location name cannot be empty")
             .MaximumLength(50).WithMessage("Location name cannot exceed 50 characters");
-            RuleFor(m => m.Id)
+
+            RuleFor(m => m.Id).NotNull().WithMessage("Id cannot be null").NotEqual(0)
                .GreaterThanOrEqualTo(0).WithMessage("Id must be greater than or equal to 0");
         }
     }

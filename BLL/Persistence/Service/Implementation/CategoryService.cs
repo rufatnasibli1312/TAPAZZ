@@ -36,6 +36,7 @@ namespace BLL.Persistence.Service.Concrete
             {
 
                 CategoryToAddValidator validator = new CategoryToAddValidator();
+                var model = JsonSerializer.Serialize(categoryDto);
                 var result = validator.Validate(categoryDto);
                 errors = result.Errors.Select(m => m.ErrorMessage).ToList();
                 if (result.IsValid)
@@ -44,7 +45,7 @@ namespace BLL.Persistence.Service.Concrete
                     var CheckParentCategory = await _repository.FindIsItParentCategoryOrNot(categoryDto.ParentCategoryId);
                     if (CheckParentCategory)
                     {
-                        var model = JsonSerializer.Serialize(categoryDto);
+                        
                         Category category = _mapper.Map<Category>(categoryDto);
                         await _repository.AddAsync(category);
                         Log.Information($"{nameof(CategoryService)}.{nameof(AddAsync)} - Category added successfully. Data: {model}");
@@ -60,7 +61,7 @@ namespace BLL.Persistence.Service.Concrete
                 else
                 {
 
-                    throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.", errors);
+                    throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
                 }
 
             }
@@ -115,7 +116,7 @@ namespace BLL.Persistence.Service.Concrete
                         {
                             await _repository.Delete(existingCategory);
 
-                            Log.Information($"{nameof(CategoryService)}.{nameof(Delete)} - Category Deleted successfully. Data: {model}");
+                            Log.Information($"{nameof(CategoryService)}.{nameof(Delete)} - Category Deleted successfully. Id: {model}");
                         }
                        
                     }
@@ -123,7 +124,7 @@ namespace BLL.Persistence.Service.Concrete
                 }
                 else
                 {
-                    throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.", errors);
+                    throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
                 }
 
                
@@ -280,7 +281,7 @@ namespace BLL.Persistence.Service.Concrete
                     else
                     {
 
-                        throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.", errors);
+                        throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
                     }
                 }
 

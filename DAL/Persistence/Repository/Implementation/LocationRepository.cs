@@ -21,7 +21,8 @@ namespace DAL.Persistence.Repository.Concrete
 
         public async Task<List<Location>> GetProductsWithLocationId(int id)
         {
-           var products = await _context.Locations.Include(m=>m.Products).Where(p=>p.Id == id).ToListAsync();
+            var products = await _context.Locations.Include(m => m.Products).Where(p => p.Id == id).ToListAsync();
+            
             return products;
         }
     }

@@ -253,3 +253,24 @@ Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException: The database operati
 2024-01-07 23:05:38.000 +04:00 [ERR] CategoryService.Delete - Validation failed-'Id' must not be equal to '0'..
 2024-01-07 23:05:44.164 +04:00 [INF] CategoryService.Delete - Category Deleted successfully. Data: {"Id":79}
 2024-01-07 23:07:18.101 +04:00 [ERR] CategoryService.Delete - InvalidOperationException:Errors: You cannot delete ParentCategory 
+2024-01-07 23:32:33.780 +04:00 [INF] CategoryService.AddAsync - Location added successfully. Data: {"Name":"string"}
+2024-01-07 23:32:52.255 +04:00 [INF] CategoryService.AddAsync - Location added successfully. Data: {"Name":"dfgfhsfhgfdfdhsfzdhsfdhndgfdnhgngdfgfdgdfgbfs"}
+2024-01-07 23:33:06.206 +04:00 [ERR] CategoryService.AddAsync - Validation failed. Errors: Location name cannot be empty
+2024-01-07 23:34:00.273 +04:00 [ERR] CategoryService.AddAsync - Validation failed. Errors: Location name cannot exceed 20 characters
+2024-01-07 23:42:54.850 +04:00 [INF] LocationController.UpdateLocation({"Id":0,"Name":"string"})
+2024-01-07 23:42:55.431 +04:00 [ERR] LocationController.UpdateLocation({"Id":0,"Name":"string"})
+2024-01-07 23:43:13.663 +04:00 [INF] LocationController.UpdateLocation({"Id":0,"Name":"string"})
+2024-01-07 23:43:13.762 +04:00 [ERR] LocationController.UpdateLocation({"Id":0,"Name":"string"})
+2024-01-07 23:43:21.965 +04:00 [INF] LocationController.UpdateLocation({"Id":0,"Name":"sdfsfdsf"})
+2024-01-07 23:43:22.063 +04:00 [ERR] LocationController.UpdateLocation({"Id":0,"Name":"sdfsfdsf"})
+2024-01-07 23:44:47.244 +04:00 [ERR] LocationService.UpdateAsync - Validation failed. Errors: 'Id' must not be equal to '0'.
+2024-01-07 23:45:01.122 +04:00 [ERR] LocationService.UpdateAsync - Validation failed. Errors: Location name cannot be empty
+2024-01-07 23:45:10.646 +04:00 [INF] LocationService.UpdateAsync - Location Updated successfully. Data: {"Id":48,"Name":"sdfsdf"}
+2024-01-07 23:45:24.062 +04:00 [ERR] LocationService.UpdateAsync - InvalidOperationException:Errors: Category not found 
+2024-01-07 23:45:24.062 +04:00 [ERR] LocationService.UpdateAsync - Category not found 
+2024-01-07 23:57:37.151 +04:00 [INF] LocationService.Delete - Location Deleted successfully. Id: {"Id":48}
+2024-01-07 23:57:49.094 +04:00 [ERR] LocationService.Delete - Validation failed. Errors: 
+2024-01-07 23:58:52.745 +04:00 [ERR] LocationService.Delete - Validation failed. Errors: 
+2024-01-07 23:59:02.973 +04:00 [ERR] CategoryService.Delete - Validation failed. Errors: 'Id' must not be equal to '0'.
+2024-01-07 23:59:02.974 +04:00 [ERR] CategoryService.Delete - Validation failed-'Id' must not be equal to '0'..
+2024-01-07 23:59:08.203 +04:00 [ERR] LocationService.Delete - Validation failed. Errors: 
