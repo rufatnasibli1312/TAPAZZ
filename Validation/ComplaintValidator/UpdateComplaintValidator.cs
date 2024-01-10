@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace Validation.ComplaintValidator
 {
-    public class UpdateComplaintValidator :AbstractValidator<UpdateComplaintDto>
+    public class UpdateComplaintValidator : AbstractValidator<UpdateComplaintDto>
     {
         public UpdateComplaintValidator()
         {
             RuleFor(m => m.ComplaintText)
             .NotEmpty().WithMessage("Complaint text cannot be empty")
             .MaximumLength(500).WithMessage("Complaint text cannot exceed 500 characters");
-            RuleFor(m => m.Id)
+
+            RuleFor(m => m.Id).NotNull().WithMessage("Id cannot be null").NotEqual(0)
           .GreaterThan(0).WithMessage("Id must be greater than 0");
         }
     }

@@ -18,7 +18,7 @@ namespace DAL.Filter.ActionFilter
             {
                 if (objectResult.Value is ErrorResponseDto)
                 {
-                    // Do not modify the response if it's already an error response.
+
                     return;
                 }
 
@@ -37,7 +37,7 @@ namespace DAL.Filter.ActionFilter
 
         public void OnResultExecuted(ResultExecutedContext context)
         {
-            // Do nothing here
+
         }
         public class ApiResponse<T>
         {
