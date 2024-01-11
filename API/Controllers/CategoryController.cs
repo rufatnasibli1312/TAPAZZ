@@ -64,6 +64,7 @@ namespace API.Controllers
                 {
                     return NotFound();
                 }
+               
                 return Ok(category);
 
             }
@@ -85,6 +86,7 @@ namespace API.Controllers
                 {
                     return NotFound();
                 }
+                
                 return Ok(category);
             }
             catch (Exception ex)
@@ -113,7 +115,7 @@ namespace API.Controllers
             }
         }
 
-
+      
 
 
 

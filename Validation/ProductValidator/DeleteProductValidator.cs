@@ -12,8 +12,8 @@ namespace Validation.ProductValidator
     {
         public DeleteProductValidator()
         {
-            RuleFor(product => product.Id)
-               .GreaterThan(0).WithMessage("Id must be greater than 0");
+            RuleFor(product => product.Id).NotEqual(0)
+                .WithMessage("Id must be greater than 0 ");
         }
     }
 }

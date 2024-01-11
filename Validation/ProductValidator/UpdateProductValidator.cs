@@ -12,8 +12,8 @@ namespace Validation.ProductValidator
     {
         public UpdateProductValidator()
         {
-            RuleFor(product => product.Id)
-               .GreaterThan(0).WithMessage("Id must be greater than 0");
+            RuleFor(product => product.Id).NotEqual(0)
+             .WithMessage("Id must be greater than 0");
 
             RuleFor(product => product.Name)
                 .NotEmpty().WithMessage("Product name cannot be empty")
@@ -22,14 +22,14 @@ namespace Validation.ProductValidator
             RuleFor(product => product.Description)
                 .MaximumLength(500).WithMessage("Product description cannot exceed 500 characters");
 
-            RuleFor(product => product.Price)
-                .GreaterThan(0).WithMessage("Price must be greater than 0");
+            RuleFor(product => product.Price).NotEqual(0)
+               .WithMessage("Price must be greater than 0");
 
-            RuleFor(product => product.LocationId)
-                .GreaterThan(0).WithMessage("LocationId must be greater than 0");
+            RuleFor(product => product.LocationId).NotEqual(0)
+                .WithMessage("LocationId must be greater than 0");
 
-            RuleFor(product => product.CategoryId)
-                .GreaterThan(0).WithMessage("CategoryId must be greater than 0");
+            RuleFor(product => product.CategoryId).NotEqual(0)
+                 .WithMessage("CategoryId must be greater than 0 ");
 
             RuleFor(product => product.newPhotos)
                 .Must(photos => photos != null && photos.Count > 0).WithMessage("At least one new photo is required");

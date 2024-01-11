@@ -27,7 +27,7 @@ namespace BLL.JWT
             var issuer = _configuration["JWTToken:Issuer"];
             var signInCredential = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
             claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-            //claims.Add(new Claim(ClaimTypes.Role,role))
+          
 
             var tokenDescriptor = new JwtSecurityToken
             (

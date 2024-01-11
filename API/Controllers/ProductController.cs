@@ -27,7 +27,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles ="User")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> CreateProduct([FromForm] ProductAddDto productAddDto)
         {
             var model = JsonSerializer.Serialize(productAddDto);
@@ -99,7 +99,7 @@ namespace API.Controllers
         }
 
         [HttpGet("UserId")]
-        [Authorize(Roles ="User")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> GetMyProducts()
         {
             Log.Information($"{nameof(ProductController)}.{nameof(GetMyProducts)}()");

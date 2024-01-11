@@ -17,7 +17,7 @@ namespace Validation.ComplaintValidator
             .MaximumLength(500).WithMessage("Complaint text cannot exceed 500 characters");
 
             RuleFor(m => m.Id).NotNull().WithMessage("Id cannot be null").NotEqual(0)
-          .GreaterThan(0).WithMessage("Id must be greater than 0");
+           .WithMessage("Id must be greater than 0 ");
         }
     }
 }

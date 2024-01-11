@@ -12,8 +12,8 @@ namespace Validation.FavouriteValidator
     {
         public DeleteFavouriteValidator()
         {
-            RuleFor(m => m.Id)
-          .GreaterThan(0).WithMessage("Id must be greater than 0");
+            RuleFor(m => m.Id).NotEqual(0)
+           .WithMessage("Id must be greater than 0 ");
         }
     }
 }

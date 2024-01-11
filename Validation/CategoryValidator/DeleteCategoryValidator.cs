@@ -13,7 +13,7 @@ namespace Validation.CategoryValidator
         public DeleteCategoryValidator()
         {
             RuleFor(m => m.Id).NotNull().WithMessage("Id cannot be null").NotEqual(0)
-               .GreaterThanOrEqualTo(0).WithMessage("Id must be greater than or equal to 0");
+               .WithMessage("Id must be greater than 0 ");
         }
     }
 }

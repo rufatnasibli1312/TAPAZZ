@@ -20,8 +20,9 @@ namespace DAL.Persistence.Repository.Implementation
 
         public async Task<Favorite> GetByProductIdAndUserIdAsync(int productId, string userId)
         {
-            return await _context.Favorites
+          var  favourite =   await _context.Favorites
             .FirstOrDefaultAsync(f => f.ProductId == productId && f.UserId == userId);
+            return favourite;
         }
 
        

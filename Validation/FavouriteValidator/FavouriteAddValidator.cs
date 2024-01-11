@@ -12,8 +12,8 @@ namespace Validation.FavouriteValidator
     {
         public FavouriteAddValidator()
         {
-            RuleFor(m => m.ProductId)
-           .GreaterThan(0).WithMessage("ProductId must be greater than 0");
+            RuleFor(m => m.ProductId).NotEqual(0)
+           .WithMessage("ProductId must be greater than 0 ");
         }
     }
 }

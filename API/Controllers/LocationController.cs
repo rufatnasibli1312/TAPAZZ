@@ -59,7 +59,7 @@ namespace API.Controllers
                 {
                     return NotFound();
                 }
-               
+                
                 return Ok(locations);
             }
             catch (Exception ex)

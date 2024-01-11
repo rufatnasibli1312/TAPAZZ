@@ -22,7 +22,7 @@ namespace Validation.CategoryValidator
      .NotEqual(0).WithMessage("ParentCategoryId must be greater than 0");
 
             RuleFor(m => m.Id).NotNull().WithMessage("CategoryId must not be null").NotEqual(0)
-                .GreaterThanOrEqualTo(0).WithMessage("Id must be greater than or equal to 0");
+                 .WithMessage("CategoryId must be greater than 0 ");
         }
     }
 }

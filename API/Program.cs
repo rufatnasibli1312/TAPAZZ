@@ -1,4 +1,4 @@
-
+using BLL.CustomException;
 using BLL.Mapper;
 using BLL.Persistence.Service.Abstract;
 using BLL.Persistence.Service.Abstraction;
@@ -15,8 +15,9 @@ using DAL.ServiceExtensions;
 using DTO.AccountDto_s;
 using Entity.Entities;
 using FluentValidation;
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Net;
 using System.Text;
 
 using Validation.ServiceExtensions;
@@ -149,7 +151,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-//AddedIdentity
+
 
 var app = builder.Build();
 
@@ -161,12 +163,22 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 app.UseHttpsRedirection();
 
 
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+
+
+
+    // Add global exception handling middleware
+    app.UseMiddleware<GlobalExceptionMiddleware>();
+    app.UseHsts();
+
 
 app.UseStaticFiles();
 app.MapControllers();
