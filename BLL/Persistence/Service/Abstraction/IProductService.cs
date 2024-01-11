@@ -16,7 +16,7 @@ namespace BLL.Persistence.Service.Abstraction
 
         Task<List<ProductToListDto>> GetMyProductsAsync();
 
-        Task<bool> Delete(DeleteProductDto entity);
+        Task Delete(DeleteProductDto entity);
 
         Task UpdateAsync(UpdateProductDto updateProductDto, string webRootPath);
         

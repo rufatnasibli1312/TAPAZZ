@@ -286,3 +286,188 @@ System.InvalidOperationException: A second operation was started on this context
 2024-01-11 20:41:39.917 +04:00 [ERR] FavouriteAddDto.AddAsync - InvalidOperationException:Errors: Favorite already exists.
 2024-01-11 20:47:20.180 +04:00 [INF] AccountController.Login({"Email":"tural@gmail.com","Password":"Rufat123"}
 2024-01-11 20:47:36.662 +04:00 [INF] FavouriteService.GetAllAsync - Favourite Getted All Succesfully.
+2024-01-11 21:28:39.923 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat123"}
+2024-01-11 21:29:23.867 +04:00 [INF] ProductController.CreateProduct({"Name":"MBW","Description":"ss","IsNew":false,"IsDelivered":false,"Price":34800,"Photos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photos\u0022; filename=\u0022Image 2.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photos\u0022; filename=\u0022Image 2.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":1678948,"Name":"Photos","FileName":"Image 2.jpg"}],"LocationId":27,"CategoryId":70})
+2024-01-11 21:29:24.115 +04:00 [ERR] An exception occurred in the database while saving changes for context type 'DAL.Data.MyDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Products_Categories_CategoryID". The conflict occurred in database "TAPAZ", table "dbo.Categories", column 'Id'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:f35e3ce0-15c2-4307-80d5-e75870babfdc
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__107_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Products_Categories_CategoryID". The conflict occurred in database "TAPAZ", table "dbo.Categories", column 'Id'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:f35e3ce0-15c2-4307-80d5-e75870babfdc
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__107_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2024-01-11 21:29:24.233 +04:00 [ERR] ProductController.CreateProduct({"Name":"MBW","Description":"ss","IsNew":false,"IsDelivered":false,"Price":34800,"Photos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photos\u0022; filename=\u0022Image 2.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photos\u0022; filename=\u0022Image 2.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":1678948,"Name":"Photos","FileName":"Image 2.jpg"}],"LocationId":27,"CategoryId":70})
+2024-01-11 21:29:43.957 +04:00 [INF] ProductController.CreateProduct({"Name":"MBW","Description":"sssdfs","IsNew":false,"IsDelivered":false,"Price":34800,"Photos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photos\u0022; filename=\u0022Image 2.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photos\u0022; filename=\u0022Image 2.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":1678948,"Name":"Photos","FileName":"Image 2.jpg"}],"LocationId":27,"CategoryId":70})
+2024-01-11 21:29:43.973 +04:00 [ERR] An exception occurred in the database while saving changes for context type 'DAL.Data.MyDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Products_Categories_CategoryID". The conflict occurred in database "TAPAZ", table "dbo.Categories", column 'Id'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:f35e3ce0-15c2-4307-80d5-e75870babfdc
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__107_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Products_Categories_CategoryID". The conflict occurred in database "TAPAZ", table "dbo.Categories", column 'Id'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:f35e3ce0-15c2-4307-80d5-e75870babfdc
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__107_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2024-01-11 21:29:44.013 +04:00 [ERR] ProductController.CreateProduct({"Name":"MBW","Description":"sssdfs","IsNew":false,"IsDelivered":false,"Price":34800,"Photos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photos\u0022; filename=\u0022Image 2.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photos\u0022; filename=\u0022Image 2.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":1678948,"Name":"Photos","FileName":"Image 2.jpg"}],"LocationId":27,"CategoryId":70})
+2024-01-11 21:29:49.908 +04:00 [INF] ProductController.CreateProduct({"Name":"MBW","Description":"sssdfs","IsNew":false,"IsDelivered":false,"Price":34800,"Photos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photos\u0022; filename=\u0022Image 2.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photos\u0022; filename=\u0022Image 2.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":1678948,"Name":"Photos","FileName":"Image 2.jpg"}],"LocationId":27,"CategoryId":66})
+2024-01-11 21:31:18.523 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat123"}
+2024-01-11 21:32:00.951 +04:00 [INF] ProductController.CreateProduct({"Name":"Mercedec","Description":"tyui","IsNew":false,"IsDelivered":true,"Price":21400,"Photos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photos\u0022; filename=\u0022Image 25.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photos\u0022; filename=\u0022Image 25.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":2030011,"Name":"Photos","FileName":"Image 25.jpg"}],"LocationId":27,"CategoryId":70})
+2024-01-11 21:32:01.227 +04:00 [ERR] An exception occurred in the database while saving changes for context type 'DAL.Data.MyDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Products_Categories_CategoryID". The conflict occurred in database "TAPAZ", table "dbo.Categories", column 'Id'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:fd5f3e3f-bfde-4112-ab2b-a2ffa3556e6b
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__107_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Products_Categories_CategoryID". The conflict occurred in database "TAPAZ", table "dbo.Categories", column 'Id'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+ClientConnectionId:fd5f3e3f-bfde-4112-ab2b-a2ffa3556e6b
+Error Number:547,State:0,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__107_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2024-01-11 21:32:01.318 +04:00 [ERR] ProductController.CreateProduct({"Name":"Mercedec","Description":"tyui","IsNew":false,"IsDelivered":true,"Price":21400,"Photos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photos\u0022; filename=\u0022Image 25.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photos\u0022; filename=\u0022Image 25.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":2030011,"Name":"Photos","FileName":"Image 25.jpg"}],"LocationId":27,"CategoryId":70})
+2024-01-11 21:32:33.688 +04:00 [INF] ProductController.CreateProduct({"Name":"Mercedec","Description":"tyui","IsNew":false,"IsDelivered":true,"Price":21400,"Photos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photos\u0022; filename=\u0022Image 25.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photos\u0022; filename=\u0022Image 25.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":2030011,"Name":"Photos","FileName":"Image 25.jpg"}],"LocationId":27,"CategoryId":63})
+2024-01-11 21:39:35.937 +04:00 [INF] AccountController.Login({"Email":"tural@gmail.com","Password":"Rufat123"}
+2024-01-11 21:41:26.140 +04:00 [INF] ProductController.CreateProduct({"Name":"Yagis Geyimi","Description":"agis geyimi teze mallar Endirimde.. \uD83D\uDD3AEla keyfiyetde 100 faiz su kecirmir \uD83D\uDD3Aqalin keyfiyetli material \uD83D\uDD3Amoto surenler ucun xususi olaraq salvarin ortasi genis hazirlanir \uD83D\uDD3Akureyinde isiq qaytaricilari var","IsNew":false,"IsDelivered":true,"Price":39,"Photos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photos\u0022; filename=\u0022Image 16.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photos\u0022; filename=\u0022Image 16.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":290256,"Name":"Photos","FileName":"Image 16.jpg"}],"LocationId":29,"CategoryId":59})
+2024-01-11 21:54:29.461 +04:00 [INF] AccountController.Login({"Email":"tural@gmail.com","Password":"Rufat123"}
+2024-01-11 21:55:35.866 +04:00 [ERR] ProductService.AddAsync - Could not load file or assembly 'Microsoft.EntityFrameworkCore, Version=7.0.12.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'. The system cannot find the file specified.
+2024-01-11 21:56:16.936 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat123"}
+2024-01-11 21:59:16.001 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat123"}
+2024-01-11 21:59:46.955 +04:00 [INF] ProductService.AddAsync - Product Added Succesfully. Data: {"Name":"qweqw","Description":"qweq","IsNew":false,"IsDelivered":true,"Price":334,"Photos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photos\u0022; filename=\u0022Image 6.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photos\u0022; filename=\u0022Image 6.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":3151760,"Name":"Photos","FileName":"Image 6.jpg"}],"LocationId":32,"CategoryId":66}
+2024-01-11 22:07:55.770 +04:00 [INF] ProductController.GetProduct(18)
+2024-01-11 22:07:56.146 +04:00 [INF] ProductService.GetAllAsync - Product Gets Succesfully. Id = 18
+2024-01-11 22:10:46.147 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat123"}
+2024-01-11 22:11:05.994 +04:00 [INF] ProductController.GetMyProducts()
+2024-01-11 22:11:06.044 +04:00 [INF] ProductService.GetMyProductsAsync - Your Products Gets Succesfully.
+2024-01-11 22:27:29.526 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat123"}
+2024-01-11 22:28:12.491 +04:00 [INF] ProductController.UpdateProduct({"Id":20,"Name":"aaaaaa","Description":"bbbbbbbbb","IsNew":true,"IsDelivered":false,"Price":3242,"newPhotos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022newPhotos\u0022; filename=\u0022Image 5.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022newPhotos\u0022; filename=\u0022Image 5.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":1408668,"Name":"newPhotos","FileName":"Image 5.jpg"}],"LocationId":29,"CategoryId":59})
+2024-01-11 22:41:41.180 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat123"}
+2024-01-11 22:42:26.027 +04:00 [INF] ProductController.UpdateProduct({"Id":19,"Name":"Geyim","Description":"erqwe","IsNew":true,"IsDelivered":true,"Price":36,"newPhotos":[{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022newPhotos\u0022; filename=\u0022Image 1.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022newPhotos\u0022; filename=\u0022Image 1.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":262577,"Name":"newPhotos","FileName":"Image 1.jpg"}],"LocationId":36,"CategoryId":59})

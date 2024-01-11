@@ -1,5 +1,7 @@
-﻿using DTO.ProductDto_s;
+﻿using DAL.Data;
+using DTO.ProductDto_s;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +12,12 @@ namespace Validation.ProductValidator
 {
     public class UpdateProductValidator : AbstractValidator<UpdateProductDto>
     {
-        public UpdateProductValidator()
+
+        public MyDbContext _context { get; }
+
+        public UpdateProductValidator(MyDbContext context)
         {
+            _context = context;
             RuleFor(product => product.Id).NotEqual(0)
              .WithMessage("Id must be greater than 0");
 
@@ -25,14 +31,28 @@ namespace Validation.ProductValidator
             RuleFor(product => product.Price).NotEqual(0)
                .WithMessage("Price must be greater than 0");
 
-            RuleFor(product => product.LocationId).NotEqual(0)
-                .WithMessage("LocationId must be greater than 0");
+            RuleFor(product => product.LocationId)
+                        .Must(BeValidLocationId).WithMessage("LocationId must be a valid entry in the database");
 
-            RuleFor(product => product.CategoryId).NotEqual(0)
-                 .WithMessage("CategoryId must be greater than 0 ");
+            RuleFor(product => product.CategoryId)
+              .Must(BeValidCategoryId).WithMessage("CategoryId must be a valid entry in the database");
 
             RuleFor(product => product.newPhotos)
                 .Must(photos => photos != null && photos.Count > 0).WithMessage("At least one new photo is required");
+
+        }
+        private bool BeValidLocationId(int locationId)
+        {
+
+            return _context.Locations.Any(l => l.Id == locationId);
+        }
+
+        private bool BeValidCategoryId(int categoryId)
+        {
+
+            return _context.Categories.Any(c => c.Id == categoryId);
         }
     }
+
+}
 }

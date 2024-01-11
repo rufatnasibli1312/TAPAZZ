@@ -43,6 +43,10 @@ namespace Validation.ServiceExtensions
             services.AddScoped<IValidator<ProductAddDto>, ProductAddValidator>();
             services.AddScoped<IValidator<UpdateProductDto>, UpdateProductValidator>();
 
+            services.AddTransient<ProductAddValidator>();
+            services.AddTransient<UpdateProductValidator>();
+
+
 
         }
     }

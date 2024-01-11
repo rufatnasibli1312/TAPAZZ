@@ -44,7 +44,9 @@ namespace BLL.Mapper
             CreateMap<ProductAddDto, Product>()
                 .ForMember(d => d.CreateDate, opt => opt.MapFrom(s => DateTime.Now))
                 .ForMember(d => d.ExpireDate, opt => opt.MapFrom(s => DateTime.Now.AddDays(14)))
+              //.ForMember(d => d.IsActive, opt => opt.MapFrom(s => DateTime.Now < (DateTime.Now.AddDays(14))))
                 .ReverseMap();
+           
 
             CreateMap<Product, ProductToListDto>().ReverseMap();
             CreateMap<Product, ProductFindIdDto>().ReverseMap();

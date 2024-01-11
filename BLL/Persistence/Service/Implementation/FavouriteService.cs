@@ -66,7 +66,7 @@ namespace BLL.Persistence.Service.Implementation
 
                         }
                         favorite.UserId = userId;
-                        Log.Information($"{nameof(FavouriteService)}.{nameof(AddAsync)} - Favourite Added Succesfully. Data: {favouriteAddDto}");
+                        Log.Information($"{nameof(FavouriteService)}.{nameof(AddAsync)} - Favourite Added Succesfully. Data: {model}");
                         await _favouriteRepository.AddAsync(favorite);
 
                     }
@@ -89,16 +89,16 @@ namespace BLL.Persistence.Service.Implementation
             {
                 if (ex is ValidationException)
                 {
-                    Log.Error($"{nameof(FavouriteAddDto)}.{nameof(AddAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(FavouriteService)}.{nameof(AddAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
                 }
 
                 else if (ex is InvalidOperationException)
                 {
-                    Log.Error($"{nameof(FavouriteAddDto)}.{nameof(AddAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(FavouriteService)}.{nameof(AddAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
                 }
                 else
                 {
-                    Log.Error($"{nameof(FavouriteAddDto)}.{nameof(AddAsync)} - {ex.Message}");
+                    Log.Error($"{nameof(FavouriteService)}.{nameof(AddAsync)} - {ex.Message}");
 
                 }
                 throw;
@@ -135,11 +135,11 @@ namespace BLL.Persistence.Service.Implementation
 
                 if (ex is InvalidOperationException)
                 {
-                    Log.Error($"{nameof(FavouriteAddDto)}.{nameof(GetAllAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(FavouriteService)}.{nameof(GetAllAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
                 }
                 else
                 {
-                    Log.Error($"{nameof(FavouriteAddDto)}.{nameof(GetAllAsync)} - {ex.Message}");
+                    Log.Error($"{nameof(FavouriteService)}.{nameof(GetAllAsync)} - {ex.Message}");
 
                 }
                 throw;
@@ -182,11 +182,11 @@ namespace BLL.Persistence.Service.Implementation
             {
                 if (ex is InvalidOperationException)
                 {
-                    Log.Error($"{nameof(FavouriteAddDto)}.{nameof(GetAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(FavouriteService)}.{nameof(GetAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
                 }
                 else
                 {
-                    Log.Error($"{nameof(FavouriteAddDto)}.{nameof(GetAsync)} - {ex.Message}");
+                    Log.Error($"{nameof(FavouriteService)}.{nameof(GetAsync)} - {ex.Message}");
 
                 }
                 throw;
@@ -238,16 +238,16 @@ namespace BLL.Persistence.Service.Implementation
             {
                 if (ex is ValidationException)
                 {
-                    Log.Error($"{nameof(FavouriteAddDto)}.{nameof(Delete)} - Validation failed. Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(FavouriteService)}.{nameof(Delete)} - Validation failed. Errors: {string.Join(", ", errors)}");
                 }
 
                 else if (ex is InvalidOperationException)
                 {
-                    Log.Error($"{nameof(FavouriteAddDto)}.{nameof(Delete)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(FavouriteService)}.{nameof(Delete)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
                 }
                 else
                 {
-                    Log.Error($"{nameof(FavouriteAddDto)}.{nameof(Delete)} - {ex.Message}");
+                    Log.Error($"{nameof(FavouriteService)}.{nameof(Delete)} - {ex.Message}");
 
                 }
                 throw;

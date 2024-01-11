@@ -3,6 +3,7 @@ using BLL.Persistence.Service.Abstraction;
 using BLL.ServiceExtensions;
 using DAL.Data;
 using DAL.Persistence.Repository.Abstraction;
+using DTO;
 using DTO.LocationDto_s;
 using DTO.ProductDto_s;
 using Entity.Entities;
@@ -10,13 +11,18 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Validation.ProductValidator;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BLL.Persistence.Service.Implementation
 {
@@ -30,8 +36,10 @@ namespace BLL.Persistence.Service.Implementation
         public IAccountService _accountService { get; }
         public FindUserRole _findUserRole { get; }
         public MyDbContext _dbContext { get; }
+        public ProductAddValidator _addValidator { get; }
+        public UpdateProductValidator _updateValidator { get; }
 
-        public ProductService(IProductRepository productRepository, IMapper mapper, JwtTokenExtractor jwtTokenExtractor, IAccountService accountService, FindUserRole findUserRole,MyDbContext dbContext)
+        public ProductService(IProductRepository productRepository, IMapper mapper, JwtTokenExtractor jwtTokenExtractor, IAccountService accountService, FindUserRole findUserRole, MyDbContext dbContext, ProductAddValidator Addvalidator, UpdateProductValidator  updateValidator)
         {
             _productRepository = productRepository;
             _mapper = mapper;
@@ -39,126 +47,369 @@ namespace BLL.Persistence.Service.Implementation
             _accountService = accountService;
             _findUserRole = findUserRole;
             _dbContext = dbContext;
+            _addValidator = Addvalidator;
+            _updateValidator = updateValidator;
         }
 
 
         public async Task AddAsync(ProductAddDto productDto, string webRootPath)
         {
-            Product product = _mapper.Map<Product>(productDto);
-            var userId = _jwtTokenExtractor.GetUserIdFromJwtToken();
-            product.UserID = userId;
-            foreach (var photo in productDto.Photos)
+            List<string> errors = new List<string>();
+            try
             {
-                string fileName = photo.FileName;
-                string name = $"{Guid.NewGuid()}-{fileName}";
-                string path = Path.Combine(webRootPath, "ProductPhoto");
-                string filePath = Path.Combine(path, name);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                var model = JsonSerializer.Serialize(productDto);
+
+                var result = _addValidator.Validate(productDto);
+
+                errors = result.Errors.Select(m => m.ErrorMessage).ToList();
+                if (result.IsValid)
                 {
-                    await photo.CopyToAsync(fileStream);
+                    Product product = _mapper.Map<Product>(productDto);
+                    var userId = _jwtTokenExtractor.GetUserIdFromJwtToken();
+                    product.UserID = userId;
+                    foreach (var photo in productDto.Photos)
+                    {
+                        string fileName = photo.FileName;
+                        string name = $"{Guid.NewGuid()}-{fileName}";
+                        string path = Path.Combine(webRootPath, "ProductPhoto");
+                        string filePath = Path.Combine(path, name);
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await photo.CopyToAsync(fileStream);
+                        }
+                        product.PhotoPath.Add(new ImagesPath { Path = name });
+                    }
+                    Log.Information($"{nameof(ProductService)}.{nameof(AddAsync)} - Product Added Succesfully. Data: {model}");
+                    await _productRepository.AddAsync(product);
                 }
-                product.PhotoPath.Add(new ImagesPath { Path = name });
+                else
+                {
+                    throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
+                }
+
             }
-            await _productRepository.AddAsync(product);
+            catch (Exception ex)
+            {
+                if (ex is ValidationException)
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(AddAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
+                }
+
+                else if (ex is InvalidOperationException)
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(AddAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                }
+                else
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(AddAsync)} - {ex.Message}");
+
+                }
+                throw;
+            }
+
+
 
         }
 
         public async Task<List<ProductToListDto>> GetAllAsync()
         {
-            List<Product> products = await _productRepository.GetAllAsync();
-            var result = new List<ProductToListDto>();
-
-            foreach (var product in products)
+            List<string> errors = new List<string>();
+            try
             {
-                if (product.ExpireDate > DateTime.Now)
+                List<Product> products = await _productRepository.GetAllAsync();
+                if (products.Count == 0)
                 {
-                    product.IsActive = true;
-                    var productDto = _mapper.Map<ProductToListDto>(product);
-                    result.Add(productDto);
+                    errors.Add("Products not found");
+                    throw new InvalidOperationException($"{string.Join(", ", errors)}");
                 }
+                else
+                {
+                    var result = new List<ProductToListDto>();
+
+                    foreach (var product in products)
+                    {
+                        if (product.ExpireDate > DateTime.Now)
+                        {
+                            product.IsActive = true;
+                        }
+                        else
+                        {
+                            product.IsActive = false;
+                        }
+                        var productDto = _mapper.Map<ProductToListDto>(product);
+                        result.Add(productDto);
+
+
+
+                    }
+
+                    await _dbContext.SaveChangesAsync();
+                    Log.Information($"{nameof(ProductService)}.{nameof(GetAllAsync)} - Products Get Succesfully.");
+                    return result;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (ex is InvalidOperationException)
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(GetAllAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                }
+                else
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(GetAllAsync)} - {ex.Message}");
+
+                }
+                throw;
             }
 
-            await _dbContext.SaveChangesAsync();
-
-            return result;
 
         }
 
         public async Task<ProductFindIdDto> GetAsync(int id)
         {
+            List<string> errors = new List<string>();
+            try
+            {
+                Product product = await _productRepository.GetAsync(id);
+                if (product == null)
+                {
+                    errors.Add("Product not found");
+                    throw new InvalidOperationException($"{string.Join(", ", errors)}");
+                }
+                var result = _mapper.Map<ProductFindIdDto>(product);
+                Log.Information($"{nameof(ProductService)}.{nameof(GetAsync)} - Product Gets Succesfully. Id = {id}");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                if (ex is InvalidOperationException)
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(GetAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                }
+                else
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(GetAsync)} - {ex.Message}");
 
-            Product product = await _productRepository.GetAsync(id);
-            var result = _mapper.Map<ProductFindIdDto>(product);
+                }
+                throw;
+            }
 
-            return result;
+
         }
 
         public async Task<List<ProductToListDto>> GetMyProductsAsync()
         {
-            List<Product> products = await _productRepository.GetAllAsync();
-            var userId = _jwtTokenExtractor.GetUserIdFromJwtToken();
-
-            List<ProductToListDto> result = _mapper.Map<List<ProductToListDto>>(
-       products.Where(product => product.UserID == userId).ToList());
-            return result;
-        }
-
-        public async Task<bool> Delete(DeleteProductDto entity)
-        {
-            var product = await _productRepository.GetAsync(entity.Id);
-            if (product != null)
+            List<string> errors = new List<string>();
+            try
             {
-                var userId = _jwtTokenExtractor.GetUserIdFromJwtToken();
-                var user  = await _accountService.FindUserById(userId);
-                var userRole = await _findUserRole.GetUserRole(user);
-                if (product.UserID == userId || userRole == "Admin")
+                List<Product> products = await _productRepository.GetAllAsync();
+                if (products == null)
                 {
-                    await _productRepository.Delete(product);
-                    return true;
+                    errors.Add("Product not found");
+                    throw new InvalidOperationException($"{string.Join(", ", errors)}");
                 }
-                return false;
+                else
+                {
+                    var userId = _jwtTokenExtractor.GetUserIdFromJwtToken();
+
+                    List<ProductToListDto> result = _mapper.Map<List<ProductToListDto>>(
+               products.Where(product => product.UserID == userId).ToList());
+                    Log.Information($"{nameof(ProductService)}.{nameof(GetMyProductsAsync)} - Your Products Gets Succesfully.");
+                    return result;
+                }
 
             }
-            return false;
+            catch (Exception ex)
+            {
+                if (ex is InvalidOperationException)
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(GetMyProductsAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                }
+                else
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(GetMyProductsAsync)} - {ex.Message}");
+
+                }
+                throw;
+            }
+
+        }
+
+        public async Task Delete(DeleteProductDto entity)
+        {
+            List<string> errors = new List<string>();
+            try
+            {
+                var model = JsonSerializer.Serialize(entity);
+
+                DeleteProductValidator validator = new DeleteProductValidator();
+                var result = validator.Validate(entity);
+                errors = result.Errors.Select(m => m.ErrorMessage).ToList();
+                if (result.IsValid)
+                {
+                    var product = await _productRepository.GetAsync(entity.Id);
+                    if (product != null)
+                    {
+                        var userId = _jwtTokenExtractor.GetUserIdFromJwtToken();
+                        var user = await _accountService.FindUserById(userId);
+                        if (user == null)
+                        {
+                            errors.Add("User not found");
+                            throw new InvalidOperationException($"{string.Join(", ", errors)}");
+                        }
+                        else
+                        {
+                            var userRole = await _findUserRole.GetUserRole(user);
+                            if (userRole == null)
+                            {
+                                errors.Add("UserRole not found");
+                                throw new InvalidOperationException($"{string.Join(", ", errors)}");
+                            }
+                            else
+                            {
+                                if (product.UserID == userId || userRole == "Admin")
+                                {
+                                    Log.Information($"{nameof(ProductService)}.{nameof(Delete)} -  Product Deleted Succesfully.");
+                                    await _productRepository.Delete(product);
+
+                                }
+                                else
+                                {
+                                    errors.Add("Invalid user or role for deleting the product");
+                                    throw new InvalidOperationException($"{string.Join(", ", errors)}");
+                                }
+                            }
+
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        errors.Add("Product not found");
+                        throw new InvalidOperationException($"{string.Join(", ", errors)}");
+                    }
+
+                }
+                else
+                {
+                    throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (ex is ValidationException)
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(Delete)} - Validation failed. Errors: {string.Join(", ", errors)}");
+                }
+
+                else if (ex is InvalidOperationException)
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(Delete)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                }
+                else
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(Delete)} - {ex.Message}");
+
+                }
+                throw;
+            }
+
         }
 
         public async Task UpdateAsync(UpdateProductDto updateProductDto, string webRootPath)
         {
-            var existingProduct = await _productRepository.GetProductsWithPhotoPath(updateProductDto.Id);
-            if (existingProduct != null)
+            List<string> errors = new List<string>();
+            try
             {
-
-
-                _mapper.Map(updateProductDto, existingProduct);
-
-
-                foreach (var imagePath in existingProduct.PhotoPath)
+                var model = JsonSerializer.Serialize(updateProductDto);
+                
+                
+                var result = _updateValidator.Validate(updateProductDto);
+                var error = result.Errors.Select(m => m.ErrorMessage).ToList();
+                if (result.IsValid)
                 {
-                    existingProduct.PhotoPath.Remove(imagePath);
-
-                }
-
-
-                foreach (var newPhoto in updateProductDto.newPhotos)
-                {
-                    string fileName = newPhoto.FileName;
-                    string name = $"{Guid.NewGuid()}-{fileName}";
-                    string path = Path.Combine(webRootPath, "ProductPhoto");
-                    string filePath = Path.Combine(path, name);
+                    var existingProduct = await _productRepository.GetProductsWithPhotoPath(updateProductDto.Id);
+                    var userId = _jwtTokenExtractor.GetUserIdFromJwtToken();
 
 
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    if (existingProduct != null)
                     {
-                        await newPhoto.CopyToAsync(fileStream);
+
+                        if (userId == existingProduct.UserID)
+                        {
+                            _mapper.Map(updateProductDto, existingProduct);
+
+
+                            foreach (var imagePath in existingProduct.PhotoPath)
+                            {
+                                existingProduct.PhotoPath.Remove(imagePath);
+
+                            }
+
+
+                            foreach (var newPhoto in updateProductDto.newPhotos)
+                            {
+                                string fileName = newPhoto.FileName;
+                                string name = $"{Guid.NewGuid()}-{fileName}";
+                                string path = Path.Combine(webRootPath, "ProductPhoto");
+                                string filePath = Path.Combine(path, name);
+
+
+                                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                                {
+                                    await newPhoto.CopyToAsync(fileStream);
+                                }
+
+
+                                existingProduct.PhotoPath.Add(new ImagesPath { Path = name });
+                            }
+                            Log.Information($"{nameof(ProductService)}.{nameof(UpdateAsync)} -  Product Updated Succesfully.");
+                            await _productRepository.UpdateAsync(existingProduct);
+                        }
+                        else
+                        {
+                            errors.Add("Invalid user  for updated the product");
+                            throw new InvalidOperationException($"{string.Join(", ", errors)}");
+                        }
+
+
+                    }
+                    else
+                    {
+                        error.Add("Product is null");
                     }
 
-
-                    existingProduct.PhotoPath.Add(new ImagesPath { Path = name });
                 }
-                await _productRepository.UpdateAsync(existingProduct);
+                else
+                {
+                    throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
+                }
             }
+            catch (Exception ex)
+            {
+                if (ex is ValidationException)
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(UpdateAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
+                }
+
+                else if (ex is InvalidOperationException)
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(UpdateAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                }
+                else
+                {
+                    Log.Error($"{nameof(ProductService)}.{nameof(UpdateAsync)} - {ex.Message}");
+
+                }
+                throw;
+            }
+
         }
 
-       
+
     }
 }
