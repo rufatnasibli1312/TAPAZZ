@@ -278,9 +278,9 @@ namespace BLL.Persistence.Service.Implementation
                 {
                     Log.Error($"{nameof(ComplaintService)}.{nameof(UpdateAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
                 }
-                if (ex is InvalidOperationException)
+                else if (ex is InvalidOperationException)
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(UpdateAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(ComplaintService)}.{nameof(UpdateAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
                 }
                 else
                 {

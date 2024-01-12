@@ -36,33 +36,18 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromForm] RegisterModelDto model)
         {
-            var jsonModel = JsonSerializer.Serialize(model);
-            Log.Information($"{nameof(AccountController)}.{nameof(Register)}({jsonModel}");
 
-            RegisterValidation validator = new RegisterValidation();
-            var result = await validator.ValidateAsync(model);
 
-            if (!result.IsValid)
-            {
-                var errorMessages = result.Errors.Select(error => error.ErrorMessage).ToList();
-                return BadRequest(new { Errors = errorMessages });
-            }
+
 
             try
             {
                 var user = await _accountService.RegisterUserAsync(model, _webHostEnvironment.WebRootPath);
-                if (user.Succeeded)
-                {
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest(new { Errors = user.Errors });
-                }
+                return Ok();
             }
             catch (Exception ex)
             {
-                Log.Error($"{nameof(AccountController)}.{nameof(Register)}({jsonModel}");
+
                 return BadRequest();
             }
 
@@ -128,35 +113,25 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            var jsonModel = JsonSerializer.Serialize(loginDto);
-            Log.Information($"{nameof(AccountController)}.{nameof(Login)}({jsonModel}");
-            LoginValidator validator = new LoginValidator();
-            var result = validator.Validate(loginDto);
-            var error = result.Errors.Select(m => m.ErrorMessage).ToList();
-            if (result.IsValid)
+
+            try
             {
-                try
-                {
-                    var response = await _accountService.Login(loginDto);
-                    Response.Cookies.Append("X-Access-Token", response.AccessToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                var response = await _accountService.Login(loginDto);
+                Response.Cookies.Append("X-Access-Token", response.AccessToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
 
-                    Response.Cookies.Append("X-Refresh-Token", response.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                Response.Cookies.Append("X-Refresh-Token", response.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
 
 
-
-
-
-                    return Ok(response);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"{nameof(AccountController)}.{nameof(Login)}({jsonModel}");
-                    return BadRequest(ex.Message);
-                }
-
+                return Ok(response);
             }
-            Log.Error($"{nameof(AccountController)}.{nameof(Login)}({jsonModel}");
-            return BadRequest(error);
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
+
+
 
 
 
@@ -166,21 +141,17 @@ namespace API.Controllers
         [Authorize]
         public async Task<IActionResult> UpdateUser([FromForm] UpdateUserDto entity)
         {
-            var model = JsonSerializer.Serialize(entity);
-            Log.Information($"{nameof(AccountController)}.{nameof(UpdateUser)}({model})");
+
             try
             {
-                if (entity == null)
-                {
-                    return BadRequest();           //vaxt olsa buralarada validator yazarsan
-                }
+
                 await _accountService.UpdateAsync(entity, _webHostEnvironment.WebRootPath);
                 return Ok(entity);
-               
+
             }
             catch (Exception ex)
             {
-                Log.Error($"{nameof(AccountController)}.{nameof(UpdateUser)}({model})");
+
                 return BadRequest(ex.Message);
             }
 
@@ -189,23 +160,15 @@ namespace API.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteUser(DeleteUserDto dto)
         {
-            var model = JsonSerializer.Serialize(dto);
-            Log.Information($"{nameof(AccountController)}.{nameof(DeleteUser)}({model})");
+
             try
             {
-                var result = await _accountService.DeleteAsync(dto);
-                if (result)
-                {
-                    return Ok(result);
-
-                }
-                return BadRequest(result);
-
+                await _accountService.DeleteAsync(dto);
+                return Ok();
 
             }
             catch (Exception ex)
             {
-                Log.Error($"{nameof(AccountController)}.{nameof(DeleteUser)}({model})");
                 return BadRequest(ex.Message);
             }
         }

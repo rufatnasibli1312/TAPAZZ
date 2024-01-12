@@ -1,0 +1,25 @@
+2024-01-12 12:32:22.765 +04:00 [INF] AccountController.Register({"Email":"solmaz@gmail.com","Password":"Rufat123","Fullname":"Solmaz ","Address":"Polsa","Photo":{"ContentType":"image/jpeg","ContentDisposition":"form-data; name=\u0022Photo\u0022; filename=\u0022Image 3.jpg\u0022","Headers":{"Content-Disposition":["form-data; name=\u0022Photo\u0022; filename=\u0022Image 3.jpg\u0022"],"Content-Type":["image/jpeg"]},"Length":1172254,"Name":"Photo","FileName":"Image 3.jpg"},"PhoneNumber":"\u002B994 55 784 34 75"}
+2024-01-12 13:36:49.571 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat123"}
+2024-01-12 13:36:58.429 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat12"}
+2024-01-12 13:37:02.805 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat12"}
+2024-01-12 13:37:13.248 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"sdfsdf"}
+2024-01-12 13:39:49.715 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat123"}
+2024-01-12 13:39:56.414 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat13"}
+2024-01-12 13:40:06.915 +04:00 [INF] AccountController.Login({"Email":"inci@gmail.com","Password":"Rufat13"}
+2024-01-12 13:40:57.021 +04:00 [INF] AccountController.Login({"Email":"tural@gmail.com","Password":"Rufat123"}
+2024-01-12 13:41:04.512 +04:00 [INF] AccountController.Login({"Email":"tural@gmail.com","Password":"Rufat123"}
+2024-01-12 13:42:56.637 +04:00 [INF] AccountController.GetUserById(9a58968e-3cb2-4e78-9687-89d778e53e1b
+2024-01-12 13:43:09.386 +04:00 [INF] AccountController.Login({"Email":"tural@gmail.com","Password":"Rufat123"}
+2024-01-12 13:43:44.613 +04:00 [INF] AccountController.Login({"Email":"tural@gmail.com","Password":"asdsadd"}
+2024-01-12 13:45:18.511 +04:00 [INF] AccountController.Login({"Email":"tural@gmail.com","Password":"Sfdsgsd"}
+2024-01-12 13:45:54.324 +04:00 [INF] AccountController.Login({"Email":"tural@gmail.com","Password":"SFsfgd"}
+2024-01-12 13:47:13.600 +04:00 [INF] AccountController.Login({"Email":"tural@gmail.com","Password":"asfdgh"}
+2024-01-12 13:48:27.137 +04:00 [INF] AccountController.Login({"Email":"dsfsf@gmail.com","Password":"esfgd"}
+2024-01-12 13:49:24.700 +04:00 [INF] ComplaintService.Login - User  Logged in Succesfully.
+2024-01-12 13:49:28.730 +04:00 [INF] ComplaintService.Login - User  Logged in Succesfully.
+2024-01-12 13:49:32.516 +04:00 [INF] ComplaintService.Login - User  Logged in Succesfully.
+2024-01-12 13:49:42.554 +04:00 [INF] ComplaintService.Login - User  Logged in Succesfully.
+2024-01-12 13:50:09.842 +04:00 [INF] ComplaintService.Login - User  Logged in Succesfully.
+2024-01-12 13:52:31.907 +04:00 [INF] ComplaintService.Login - User  Logged in Succesfully.
+2024-01-12 13:52:34.972 +04:00 [ERR] AccountService.Login - InvalidOperationException:Errors: Password  is not true
+2024-01-12 13:52:39.612 +04:00 [ERR] AccountService.Login - InvalidOperationException:Errors: Password  is not true

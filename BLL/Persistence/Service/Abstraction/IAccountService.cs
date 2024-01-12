@@ -19,7 +19,7 @@ namespace BLL.Persistence.Service.Abstraction
         Task<User> FindUserByEmail(string email);
         Task UpdateAsync(UpdateUserDto updateUserDto, string webRootPath);
 
-        Task<bool> DeleteAsync(DeleteUserDto deleteUserDto);
+        Task DeleteAsync(DeleteUserDto deleteUserDto);
 
         
 

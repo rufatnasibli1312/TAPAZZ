@@ -133,29 +133,24 @@ namespace API.Controllers
         [Authorize(Roles = "User")]
         public async Task<IActionResult> UpdateProduct([FromForm] UpdateProductDto entity)
         {
-            
-            if (validate.IsValid)
+
+
+            try
             {
-                try
-                {
-                    if (entity == null)
-                    {
-                        return BadRequest();
-                    }
-                    await _productService.UpdateAsync(entity, _webHostEnvironment.WebRootPath);
-                    return Ok(entity);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"{nameof(ProductController)}.{nameof(UpdateProduct)}({model})");
-                    return BadRequest();
-                }
+
+                await _productService.UpdateAsync(entity, _webHostEnvironment.WebRootPath);
+                return Ok(entity);
             }
-            Log.Error($"{nameof(ProductController)}.{nameof(UpdateProduct)}({model})");
-            return BadRequest(error);
+            catch (Exception ex)
+            {
 
-
+                return BadRequest();
+            }
         }
 
+
+
     }
+
 }
+
