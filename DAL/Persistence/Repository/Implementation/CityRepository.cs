@@ -11,19 +11,14 @@ using System.Threading.Tasks;
 
 namespace DAL.Persistence.Repository.Concrete
 {
-    public class LocationRepository : GenericRepository<Location>, ILocationRepository
+    public class CityRepository : GenericRepository<City>, ICityRepository
     {
         public MyDbContext _context { get; }
-        public LocationRepository(MyDbContext context) : base(context)
+        public CityRepository(MyDbContext context) : base(context)
         {
             _context = context;
         }
 
-        public async Task<List<Location>> GetProductsWithLocationId(int id)
-        {
-            var products = await _context.Locations.Include(m => m.Products).Where(p => p.Id == id).ToListAsync();
-            
-            return products;
-        }
+
     }
 }

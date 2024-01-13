@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Persistence.Service.Abstract
 {
-    public interface ILocationService
+    public interface ICityService
     {
 
         Task AddAsync(LocationtoAddDTO locationDto);
@@ -17,6 +17,6 @@ namespace BLL.Persistence.Service.Abstract
         Task Delete(DeleteLocationDto entity);
         Task UpdateAsync(LocationToUpdateDTO locationToUpdateDTO);
 
-        Task<List<LocationAddProductsGetDTO>> GetProductsWithLocationId(int id);
+        
     }
 }

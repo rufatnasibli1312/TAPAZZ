@@ -41,7 +41,7 @@ namespace Validation.ProductValidator
         private bool BeValidLocationId(int locationId)
         {
 
-            return _context.Locations.Any(l => l.Id == locationId);
+            return _context.Cities.Any(l => l.Id == locationId);
         }
 
         private bool BeValidCategoryId(int categoryId)

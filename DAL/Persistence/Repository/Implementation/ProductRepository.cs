@@ -1,6 +1,7 @@
 ﻿using DAL.Data;
 using DAL.Persistence.Repository.Abstract;
 using DAL.Persistence.Repository.Abstraction;
+using DTO.ProductDto_s;
 using Entity.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,6 +27,33 @@ namespace DAL.Persistence.Repository.Implementation
          .Include(p => p.PhotoPath)
          .FirstOrDefaultAsync(p => p.Id == id);
             return product;
+        }
+
+        public async Task<List<Product>> GetByFilterAsync(FindProductByFilter filter)
+        {
+
+            var query = _context.Products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter.Name))
+            {
+                // Use EF.Functions.Like for case-insensitive comparison
+                query = query.Where(p => EF.Functions.Like(p.Name, $"%{filter.Name}%"));
+            }
+
+            if (!string.IsNullOrEmpty(filter.Description))
+            {
+                // Use EF.Functions.Like for case-insensitive comparison
+                query = query.Where(p => EF.Functions.Like(p.Description, $"%{filter.Description}%"));
+            }
+
+            if (filter.CityId != 0)
+            {
+                query = query.Where(p => p.CityId == filter.CityId);
+            }
+
+            // Add other filtering conditions as needed
+
+            return await query.ToListAsync();
         }
     }
 }

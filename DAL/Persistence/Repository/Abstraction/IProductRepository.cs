@@ -1,4 +1,5 @@
-﻿using Entity.Entities;
+﻿using DTO.ProductDto_s;
+using Entity.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace DAL.Persistence.Repository.Abstraction
     {
 
         Task<Product> GetProductsWithPhotoPath(int id);
+
+        Task<List<Product>> GetByFilterAsync(FindProductByFilter filter);
     }
 }

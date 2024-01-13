@@ -16,7 +16,11 @@ namespace Entity.Entities
         public string? PhotoName { get; set; }
         public List<Product>? Products { get; set; }
 
-       
+        public ICollection<Complaint> Complaints { get; set; }
+
+        public ICollection<Favorite> Favorites { get; set; }
+
+
 
     }
 

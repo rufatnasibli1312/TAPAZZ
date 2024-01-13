@@ -8,6 +8,6 @@ namespace Entity.Entities
 {
     public class BaseEntity
     {
-        public int Id { get; set; }  //isdeleted? bool
+        public int Id { get; set; }  
     }
 }

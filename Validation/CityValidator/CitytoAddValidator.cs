@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Validation.LocationValidator
 {
-    public class LocationtoAddValidator : AbstractValidator<LocationtoAddDTO>
+    public class CitytoAddValidator : AbstractValidator<LocationtoAddDTO>
     {
-        public LocationtoAddValidator()
+        public CitytoAddValidator()
         {
             RuleFor(m => m.Name)
-         .NotEmpty().WithMessage("Location name cannot be empty")
-         .MaximumLength(20).WithMessage("Location name cannot exceed 20 characters");
+         .NotEmpty().WithMessage("City name cannot be empty")
+         .MaximumLength(20).WithMessage("City name cannot exceed 20 characters");
         }
     }
 }

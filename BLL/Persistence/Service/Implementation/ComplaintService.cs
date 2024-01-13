@@ -51,8 +51,8 @@ namespace BLL.Persistence.Service.Implementation
                 {
 
                     Complaint complaint = _mapper.Map<Complaint>(complaintAddDto);
-                    var fullname = _jwtTokenExtractor.GetFullnameFromJwtToken();
-                    complaint.CustomerName = fullname;
+                    var userId = _jwtTokenExtractor.GetUserIdFromJwtToken();
+                    complaint.UserID = userId;
                     Log.Information($"{nameof(ComplaintService)}.{nameof(AddAsync)} - Complaint Added Succesfully. Data: {model}");
                     await _repository.AddAsync(complaint);
 
@@ -91,8 +91,8 @@ namespace BLL.Persistence.Service.Implementation
                 Complaint complaint = await _repository.GetAsync(id);
                 if (complaint != null)
                 {
-                    var fullname = _jwtTokenExtractor.GetFullnameFromJwtToken();
-                    if (complaint.CustomerName == fullname)
+                    var userId = _jwtTokenExtractor.GetUserIdFromJwtToken();
+                    if (complaint.UserID == userId)
                     {
                         var result = _mapper.Map<ComplaintFindIdDto>(complaint);
                         Log.Information($"{nameof(ComplaintService)}.{nameof(GetAsync)} - Complaint Getted Succesfully. Id: {id}");
@@ -115,7 +115,7 @@ namespace BLL.Persistence.Service.Implementation
             {
                 if (ex is InvalidOperationException)
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(GetAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(CityService)}.{nameof(GetAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
                 }
                 else
                 {
@@ -134,9 +134,9 @@ namespace BLL.Persistence.Service.Implementation
             try
             {
                 List<Complaint> complaints = await _repository.GetAllAsync();
-                var fullname = _jwtTokenExtractor.GetFullnameFromJwtToken();
+                var UserId = _jwtTokenExtractor.GetUserIdFromJwtToken();
                 List<ComplaintFindIdDto> result = _mapper.Map<List<ComplaintFindIdDto>>(
-          complaints.Where(comp => comp.CustomerName == fullname).ToList());
+          complaints.Where(comp => comp.UserID == UserId).ToList());
                 if (result.Count > 0)
                 {
                     Log.Information($"{nameof(ComplaintService)}.{nameof(GetAllAsync)} - Complaint Added Succesfully.");
@@ -153,7 +153,7 @@ namespace BLL.Persistence.Service.Implementation
             {
                 if (ex is InvalidOperationException)
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(GetAllAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(CityService)}.{nameof(GetAllAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
                 }
                 else
                 {
@@ -186,8 +186,8 @@ namespace BLL.Persistence.Service.Implementation
                         throw new InvalidOperationException($"{string.Join(", ", errors)}");
                     }
 
-                    var fullName = _jwtTokenExtractor.GetFullnameFromJwtToken();
-                    if (complaint.CustomerName != fullName)
+                    var UserId = _jwtTokenExtractor.GetUserIdFromJwtToken();
+                    if (complaint.UserID != UserId)
                     {
                         errors.Add("Complaint does not belong to the authenticated user.");
                         throw new InvalidOperationException($"{string.Join(", ", errors)}");
@@ -210,7 +210,7 @@ namespace BLL.Persistence.Service.Implementation
                 }
                 if (ex is InvalidOperationException)
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(Delete)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(CityService)}.{nameof(Delete)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
                 }
 
                 else
@@ -244,9 +244,9 @@ namespace BLL.Persistence.Service.Implementation
                     var complaint = _mapper.Map(complaintDto, existingComplaint);
                     if (existingComplaint != null)
                     {
-                        var fullName = _jwtTokenExtractor.GetFullnameFromJwtToken();
+                        var userId = _jwtTokenExtractor.GetUserIdFromJwtToken();
 
-                        if (complaint.CustomerName == fullName)
+                        if (complaint.UserID == userId)
                         {
                             Log.Information($"{nameof(ComplaintService)}.{nameof(UpdateAsync)} - Complaint Updated Succesfully.");
                             await _repository.UpdateAsync(complaint);

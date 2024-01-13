@@ -15,5 +15,7 @@ namespace DTO.ProductDto_s
         public bool IsDelivered { get; set; }
         public decimal Price { get; set; }
         public bool IsActive { get; set; }
+
+
     }
 }

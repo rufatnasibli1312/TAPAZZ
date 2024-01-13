@@ -19,6 +19,8 @@ namespace BLL.Persistence.Service.Abstraction
         Task Delete(DeleteProductDto entity);
 
         Task UpdateAsync(UpdateProductDto updateProductDto, string webRootPath);
-        
+        Task<List<FindProductByFilter>> GetByFilter( FindProductByFilter filter);
+
+
     }
 }

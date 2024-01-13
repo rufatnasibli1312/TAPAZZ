@@ -18,14 +18,14 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BLL.Persistence.Service.Concrete
 {
-    public class LocationService : ILocationService
+    public class CityService : ICityService
 
     {
-        public ILocationRepository _repository { get; } // loglama isleri burda hell edilib
+        public ICityRepository _repository { get; } // loglama isleri burda hell edilib
         public IMapper _mapper { get; }
 
 
-        public LocationService(ILocationRepository repository, IMapper mapper)
+        public CityService(ICityRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -39,14 +39,14 @@ namespace BLL.Persistence.Service.Concrete
             {
                 var model = JsonSerializer.Serialize(locationDto);
 
-                LocationtoAddValidator validator = new LocationtoAddValidator();
+                CitytoAddValidator validator = new CitytoAddValidator();
                 var result = validator.Validate(locationDto);
                 errors = result.Errors.Select(m => m.ErrorMessage).ToList();
                 if (result.IsValid)
                 {
-                    Location location = _mapper.Map<Location>(locationDto);
-                    await _repository.AddAsync(location);
-                    Log.Information($"{nameof(LocationService)}.{nameof(AddAsync)} - Location added successfully. Data: {model}");
+                    City city = _mapper.Map<City>(locationDto);
+                    await _repository.AddAsync(city);
+                    Log.Information($"{nameof(CityService)}.{nameof(AddAsync)} - City added successfully. Data: {model}");
                 }
                 else
                 {
@@ -62,11 +62,11 @@ namespace BLL.Persistence.Service.Concrete
 
                 if (ex is ValidationException)
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(AddAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(CityService)}.{nameof(AddAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
                 }
                 else
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(AddAsync)} - {ex.Message}");
+                    Log.Error($"{nameof(CityService)}.{nameof(AddAsync)} - {ex.Message}");
 
                 }
                 throw;
@@ -82,7 +82,7 @@ namespace BLL.Persistence.Service.Concrete
             {
                 var model = JsonSerializer.Serialize(entity);
 
-                DeleteLocationValidation validator = new DeleteLocationValidation();
+                DeleteCityValidation validator = new DeleteCityValidation();
                 var result = validator.Validate(entity);
                 errors = result.Errors.Select(m => m.ErrorMessage).ToList();
                 if (result.IsValid)
@@ -90,13 +90,13 @@ namespace BLL.Persistence.Service.Concrete
                     var existingLocation = await _repository.GetAsync(entity.Id);
                     if (existingLocation == null)
                     {
-                        errors.Add("Location not found ");
+                        errors.Add("City not found ");
                         throw new InvalidOperationException($"{string.Join(", ", errors)}");
                     }
                     else
                     {
                         await _repository.Delete(existingLocation);
-                        Log.Information($"{nameof(LocationService)}.{nameof(Delete)} - Location Deleted successfully. Id: {model}");
+                        Log.Information($"{nameof(CityService)}.{nameof(Delete)} - City Deleted successfully. Id: {model}");
                     }
 
 
@@ -112,7 +112,7 @@ namespace BLL.Persistence.Service.Concrete
             {
                 if (ex is InvalidOperationException)
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(Delete)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(CityService)}.{nameof(Delete)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
                 }
                 if (ex is ValidationException)
                 {
@@ -120,7 +120,7 @@ namespace BLL.Persistence.Service.Concrete
                 }
                 else
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(Delete)} - {ex.Message}");
+                    Log.Error($"{nameof(CityService)}.{nameof(Delete)} - {ex.Message}");
                 }
 
                 throw;
@@ -132,22 +132,22 @@ namespace BLL.Persistence.Service.Concrete
         {
             try
             {
-                List<Location> list = await _repository.GetAllAsync();
+                List<City> list = await _repository.GetAllAsync();
                 List<LocationToListDto> result = _mapper.Map<List<LocationToListDto>>(list);
                 if (list.Count > 0)
                 {
-                    Log.Information($"{nameof(LocationService)}.{nameof(GetAllAsync)} - Locations Get successfully");
+                    Log.Information($"{nameof(CityService)}.{nameof(GetAllAsync)} - Cities Get successfully");
                 }
                 else
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(GetAllAsync)} - Locations not found");
+                    Log.Error($"{nameof(CityService)}.{nameof(GetAllAsync)} - Cities not found");
                 }
                 return result;
 
             }
             catch (Exception ex)
             {
-                Log.Error($"{nameof(LocationService)}.{nameof(GetAllAsync)} - {ex.Message}");
+                Log.Error($"{nameof(CityService)}.{nameof(GetAllAsync)} - {ex.Message}");
                 throw;
             }
 
@@ -158,15 +158,15 @@ namespace BLL.Persistence.Service.Concrete
             List<string> errors = new List<string>();
             try
             {
-                Location location = await _repository.GetAsync(id);
+                City location = await _repository.GetAsync(id);
                 var result = _mapper.Map<LocationFindIdDTO>(location);
                 if (result != null)
                 {
-                    Log.Information($"{nameof(LocationService)}.{nameof(GetAsync)} - Location Get successfully.  ID: {id}");
+                    Log.Information($"{nameof(CityService)}.{nameof(GetAsync)} - City Get successfully.  ID: {id}");
                 }
                 else
                 {
-                    errors.Add("Location not found ");
+                    errors.Add("City not found ");
                     throw new InvalidOperationException($"{string.Join(", ", errors)}");
 
                 }
@@ -176,11 +176,11 @@ namespace BLL.Persistence.Service.Concrete
             {
                 if (ex is InvalidOperationException)
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(GetAsync)} - Location not found. ID: {id}");
+                    Log.Error($"{nameof(CityService)}.{nameof(GetAsync)} - City not found. ID: {id}");
                 }
                 else
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(GetAsync)} - {ex.Message}");
+                    Log.Error($"{nameof(CityService)}.{nameof(GetAsync)} - {ex.Message}");
                 }
                 throw;
             }
@@ -200,7 +200,7 @@ namespace BLL.Persistence.Service.Concrete
                 }
                 var model = JsonSerializer.Serialize(locationToUpdateDTO);
 
-                LocationToUpdateValidator validator = new LocationToUpdateValidator();
+                CityToUpdateValidator validator = new CityToUpdateValidator();
                 var result = validator.Validate(locationToUpdateDTO);
                 errors = result.Errors.Select(m => m.ErrorMessage).ToList();
                 if (result.IsValid)
@@ -208,7 +208,7 @@ namespace BLL.Persistence.Service.Concrete
                     var existingLocation = await _repository.GetAsync(locationToUpdateDTO.Id);
                     if (existingLocation == null)
                     {
-                        errors.Add("Location not found ");
+                        errors.Add("City not found ");
                         throw new InvalidOperationException($"{string.Join(", ", errors)}");
                     }
                     else
@@ -216,7 +216,7 @@ namespace BLL.Persistence.Service.Concrete
                         var location = _mapper.Map(locationToUpdateDTO, existingLocation);
 
                         await _repository.UpdateAsync(location);
-                        Log.Information($"{nameof(LocationService)}.{nameof(UpdateAsync)} - Location Updated successfully. Data: {model}");
+                        Log.Information($"{nameof(CityService)}.{nameof(UpdateAsync)} - City Updated successfully. Data: {model}");
 
                     }
 
@@ -233,15 +233,15 @@ namespace BLL.Persistence.Service.Concrete
             {
                 if (ex is InvalidOperationException)
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(UpdateAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(CityService)}.{nameof(UpdateAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
                 }
                 if (ex is ValidationException)
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(UpdateAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
+                    Log.Error($"{nameof(CityService)}.{nameof(UpdateAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
                 }
                 else
                 {
-                    Log.Error($"{nameof(LocationService)}.{nameof(UpdateAsync)} - {ex.Message}");
+                    Log.Error($"{nameof(CityService)}.{nameof(UpdateAsync)} - {ex.Message}");
                 }
 
                 throw;
@@ -250,49 +250,6 @@ namespace BLL.Persistence.Service.Concrete
 
         }
 
-        public async Task<List<LocationAddProductsGetDTO>> GetProductsWithLocationId(int id)
-        {
-            List<string> errors = new List<string>();
-            try
-            {
-                var existingLocation = await _repository.GetAsync(id);
-                if (existingLocation != null)
-                {
-                    var productsModel = await _repository.GetProductsWithLocationId(id);
-                    var product = _mapper.Map<List<LocationAddProductsGetDTO>>(productsModel);
-                    if (product.Any(location => location.Products.Count > 0))
-                    {
-                        Log.Information($"{nameof(LocationService)}.{nameof(GetProductsWithLocationId)} - Products Get successfully with this {id}");
-                    }
-                    else
-                    {
-                        Log.Error($"{nameof(LocationService)}.{nameof(GetProductsWithLocationId)} - Products not found");
-                    }
-
-                    return product;
-                }
-                else
-                {
-                    errors.Add("Location not found ");
-                    throw new InvalidOperationException($"{string.Join(", ", errors)}");
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(LocationService)}.{nameof(GetProductsWithLocationId)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(LocationService)}.{nameof(GetProductsWithLocationId)} - {ex.Message}");
-
-                }
-                throw;
-            }
-
-        }
+      
     }
 }

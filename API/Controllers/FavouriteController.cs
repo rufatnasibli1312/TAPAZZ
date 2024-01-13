@@ -3,6 +3,7 @@ using DAL.Filter.ActionFilter;
 using DTO;
 using DTO.ComplaintDto_s;
 using DTO.FavouriteDto_s;
+using DTO.ProductDto_s;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,74 +27,34 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFavourites(FavouriteAddDto favouriteAddDto)
+        public async Task AddFavourites(FavouriteAddDto favouriteAddDto)
         {
-            try
-            {
 
-                await _favouriteService.AddAsync(favouriteAddDto);
-
-                return Ok(favouriteAddDto);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
+            await _favouriteService.AddAsync(favouriteAddDto);
 
 
         }
 
         [HttpGet("GetAllFavourite")]
-        public async Task<IActionResult> GetAllFavourite()
+        public async Task<List<FavouriteGetProductDto>> GetAllFavourite()
         {
 
-            try
-            {
-                var favourites = await _favouriteService.GetAllAsync();
-
-                return Ok(favourites);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
+            return await _favouriteService.GetAllAsync();
         }
         [HttpGet]
-        public async Task<IActionResult> GetFavourite(int id)
+        public async Task<FavouriteGetProductDto> GetFavourite(int id)
         {
 
-            try
-            {
-                var favourite = await _favouriteService.GetAsync(id);
 
-                return Ok(favourite);
-            }
-            catch (Exception ex)
-            {
+            return await _favouriteService.GetAsync(id);
 
-                return BadRequest(ex.Message);
-            }
+
         }
         [HttpDelete]
-        public async Task<IActionResult> Delete(DeleteFavouriteDto entity)
+        public async Task Delete(DeleteFavouriteDto entity)
         {
 
-
-            try
-            {
-
-                await _favouriteService.Delete(entity);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
-
+            await _favouriteService.Delete(entity);
 
         }
 

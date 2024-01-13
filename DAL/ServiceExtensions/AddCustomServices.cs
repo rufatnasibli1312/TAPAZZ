@@ -17,7 +17,7 @@ namespace DAL.ServiceExtensions
         public static void AddDALServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IAccountRepository, AccountRepository>();
-            services.AddScoped<ILocationRepository, LocationRepository>();
+            services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IComplaintRepository, ComplaintRepository>();

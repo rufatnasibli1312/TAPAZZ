@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Persistence.Repository.Abstract
 {
-    public interface ILocationRepository :IGenericRepository<Location>
+    public interface ICityRepository : IGenericRepository<City>
     {
-        Task<List<Location>> GetProductsWithLocationId(int id);
+        
 
     }
 }

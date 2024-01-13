@@ -21,13 +21,13 @@ namespace BLL.Mapper
         public MyMapperProfile()
         {
             //Location
-            CreateMap<Location, LocationToListDto>().ReverseMap();
-            CreateMap<Location, LocationtoAddDTO>().ReverseMap();
-            CreateMap<Location, LocationToUpdateDTO>().ReverseMap();
-            CreateMap<Location, DeleteLocationDto>().ReverseMap();
-            CreateMap<Location, LocationFindIdDTO>().ReverseMap();
+            CreateMap<City, LocationToListDto>().ReverseMap();
+            CreateMap<City, LocationtoAddDTO>().ReverseMap();
+            CreateMap<City, LocationToUpdateDTO>().ReverseMap();
+            CreateMap<City, DeleteLocationDto>().ReverseMap();
+            CreateMap<City, LocationFindIdDTO>().ReverseMap();
             CreateMap<Product, ProductDto>().ReverseMap();
-            CreateMap<Location, LocationAddProductsGetDTO>().ReverseMap();
+            CreateMap<City, LocationAddProductsGetDTO>().ReverseMap();
             //Category
             CreateMap<Category, CategoryToAddDto>().ReverseMap();
             CreateMap<Category, CategoryToListDto>().ReverseMap();
@@ -50,6 +50,7 @@ namespace BLL.Mapper
 
             CreateMap<Product, ProductToListDto>().ReverseMap();
             CreateMap<Product, ProductFindIdDto>().ReverseMap();
+            CreateMap<Product, FindProductByFilter>().ReverseMap();
             CreateMap<Product, UpdateProductDto>().ReverseMap();
 
             //Complaint

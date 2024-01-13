@@ -24,7 +24,7 @@ namespace DAL.Data
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<ImagesPath> Files { get; set; }
-        public DbSet<Location> Locations { get; set; }
+        public DbSet<City> Cities { get; set; }
         public DbSet<Product> Products { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,27 +35,28 @@ namespace DAL.Data
                 .HasColumnType("decimal(18, 2)");
 
 
-            modelBuilder.Entity<Location>().HasData(
-                new Location { Id = 27, Name = "Bakı" },
-                new Location { Id = 28, Name = "Gəncə" },
-                new Location { Id = 29, Name = "Sumqayıt" },
-                new Location { Id = 30, Name = "Mingəçevir" },
-                new Location { Id = 31, Name = "Naxçıvan" },
-                new Location { Id = 32, Name = "Şirvan" },
-                new Location { Id = 33, Name = "Şəki" },
-                new Location { Id = 34, Name = "Lənkəran" },
-                new Location { Id = 35, Name = "Xaçmaz" },
-                new Location { Id = 36, Name = "Göyçay" },
-                new Location { Id = 37, Name = "Quba" },
-                new Location { Id = 38, Name = "Ağcabədi" },
-                new Location { Id = 39, Name = "İmişli" },
-                new Location { Id = 40, Name = "Bərdə" },
-                new Location { Id = 41, Name = "Sabirabad" },
-                new Location { Id = 42, Name = "Xızı" },
-                new Location { Id = 43, Name = "Yevlax" },
-                new Location { Id = 44, Name = "Qusar" },
-                new Location { Id = 45, Name = "Yardımlı" },
-                new Location { Id = 46, Name = "Zaqatala" }
+
+            modelBuilder.Entity<City>().HasData(
+                new City { Id = 27, Name = "Bakı" },
+                new City { Id = 28, Name = "Gəncə" },
+                new City { Id = 29, Name = "Sumqayıt" },
+                new City { Id = 30, Name = "Mingəçevir" },
+                new City { Id = 31, Name = "Naxçıvan" },
+                new City { Id = 32, Name = "Şirvan" },
+                new City { Id = 33, Name = "Şəki" },
+                new City { Id = 34, Name = "Lənkəran" },
+                new City { Id = 35, Name = "Xaçmaz" },
+                new City { Id = 36, Name = "Göyçay" },
+                new City { Id = 37, Name = "Quba" },
+                new City { Id = 38, Name = "Ağcabədi" },
+                new City { Id = 39, Name = "İmişli" },
+                new City { Id = 40, Name = "Bərdə" },
+                new City { Id = 41, Name = "Sabirabad" },
+                new City { Id = 42, Name = "Xızı" },
+                new City { Id = 43, Name = "Yevlax" },
+                new City { Id = 44, Name = "Qusar" },
+                new City { Id = 45, Name = "Yardımlı" },
+                new City { Id = 46, Name = "Zaqatala" }
             );
             modelBuilder.Entity<Category>().HasData(
             new Category
@@ -246,8 +247,8 @@ namespace DAL.Data
                 new IdentityRole { Id = "2", Name = "User", NormalizedName = "USER" }
 
                 );
-                var roleId = _configuration["SeedData:RoleId"];
-                var userId = _configuration["SeedData:UserId"];
+            var roleId = _configuration["SeedData:RoleId"];
+            var userId = _configuration["SeedData:UserId"];
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(
                 new IdentityUserRole<string> { RoleId = roleId, UserId = userId }
@@ -255,8 +256,9 @@ namespace DAL.Data
                 );
 
 
+       
+
 
         }
-
     }
 }

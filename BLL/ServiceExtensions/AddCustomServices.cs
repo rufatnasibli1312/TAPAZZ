@@ -28,7 +28,7 @@ namespace BLL.ServiceExtensions
 
             services.AddScoped<IAccountService, AccountService>();
 
-            services.AddScoped<ILocationService, LocationService>();
+            services.AddScoped<ICityService, CityService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IComplaintService, ComplaintService>();

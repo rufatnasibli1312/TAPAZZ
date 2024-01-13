@@ -7,10 +7,12 @@ using DTO;
 using DTO.LocationDto_s;
 using DTO.ProductDto_s;
 using Entity.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Validation.ProductValidator;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using ValidationException = FluentValidation.ValidationException;
 
 namespace BLL.Persistence.Service.Implementation
 {
@@ -409,6 +412,74 @@ namespace BLL.Persistence.Service.Implementation
             }
 
         }
+
+
+
+
+
+
+
+        public async Task<List<FindProductByFilter>> GetByFilter(FindProductByFilter filter)
+        {
+            List<string> errors = new List<string>();
+
+            try
+            {
+
+                // Retrieve the product from the repository based on your filter criteria
+                List<Product> products = await _productRepository.GetByFilterAsync(filter);
+
+                // Check if the product is not found
+                if (products.Count == 0)
+                {
+                    errors.Add("Product not found");
+                    throw new InvalidOperationException($"{string.Join(", ", errors)}");
+                }
+                var filteredProducts = new List<FindProductByFilter>();
+                foreach (var product in products)
+                {
+                    if (!string.IsNullOrEmpty(filter.Name) && !product.Name.Contains(filter.Name, StringComparison.OrdinalIgnoreCase))
+                    {
+                        errors.Add($"Product '{product.Name}' does not match the specified Name");
+                    }
+
+                    if (!string.IsNullOrEmpty(filter.Description) && !product.Description.Contains(filter.Description, StringComparison.OrdinalIgnoreCase))
+                    {
+                        errors.Add($"Product '{product.Name}' does not match the specified Description");
+                    }
+
+                    if (filter.CityId != 0 && product.CityId != filter.CityId)
+                    {
+                        errors.Add($"Product '{product.Name}' does not match the specified CityId");
+                    }
+                    var mappedProduct = _mapper.Map<FindProductByFilter>(product);
+                    filteredProducts.Add(mappedProduct);
+                }
+
+                // Check for errors before mapping
+                if (errors.Count > 0)
+                {
+                    throw new InvalidOperationException($"{string.Join(", ", errors)}");
+                }
+
+                // Map the result to ProductFindIdDto
+                
+
+                Log.Information($"{nameof(ProductService)}.{nameof(GetByFilter)} - Product Gets Successfully.");
+                return filteredProducts;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, $"{nameof(ProductService)}.{nameof(GetByFilter)} - Error getting product.");
+                throw;
+            }
+        }
+
+
+
+
+
+
 
 
     }

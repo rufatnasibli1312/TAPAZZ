@@ -31,7 +31,7 @@ namespace Validation.ProductValidator
             RuleFor(product => product.Price).NotEqual(0)
                .WithMessage("Price must be greater than 0");
 
-            RuleFor(product => product.LocationId)
+            RuleFor(product => product.CityId)
                         .Must(BeValidLocationId).WithMessage("LocationId must be a valid entry in the database");
 
             RuleFor(product => product.CategoryId)
@@ -41,10 +41,10 @@ namespace Validation.ProductValidator
                 .Must(photos => photos != null && photos.Count > 0).WithMessage("At least one new photo is required");
 
         }
-        private bool BeValidLocationId(int locationId)
+        private bool BeValidLocationId(int cityId)
         {
 
-            return _context.Locations.Any(l => l.Id == locationId);
+            return _context.Cities.Any(l => l.Id == cityId);
         }
 
         private bool BeValidCategoryId(int categoryId)

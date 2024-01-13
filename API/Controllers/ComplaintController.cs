@@ -28,92 +28,40 @@ namespace API.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateComplaint(ComplaintAddDto complaintAddDto)
+        public async Task CreateComplaint(ComplaintAddDto complaintAddDto)
         {
 
 
-            try
-            {
-                await _service.AddAsync(complaintAddDto);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
+             await _service.AddAsync(complaintAddDto);
         }
         [HttpGet]
-        public async Task<IActionResult> GetComplaint(int id)
+        public async Task<ComplaintFindIdDto> GetComplaint(int id)
         {
 
-            try
-            {
-                var complaint = await _service.GetAsync(id);
-
-                return Ok(complaint);
-
-
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
+            return await _service.GetAsync(id);
         }
         [HttpGet("GetAllComplaints")]
-        public async Task<IActionResult> GetAllComplaint()
+        public async Task<List<ComplaintFindIdDto>> GetAllComplaint()
         {
 
-            try
-            {
-                var complaints = await _service.GetAllAsync();
 
-                return Ok(complaints);
+            return await _service.GetAllAsync();
 
-            }
-            catch (Exception ex)
-            {
 
-                return BadRequest(ex.Message);
-            }
         }
+
         [HttpDelete]
-        public async Task<IActionResult> DeleteComplaint(DeleteComplaintDto entity)
+        public async Task<ComplaintFindIdDto> DeleteComplaint(DeleteComplaintDto entity)
         {
 
-
-            try
-            {
-                var complaint = await _service.GetAsync(entity.Id);
-
-                await _service.Delete(entity);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-
+            return await _service.GetAsync(entity.Id);
 
 
         }
         [HttpPut]
-        public async Task<IActionResult> UpdateComplaint(UpdateComplaintDto entity)
+        public async Task UpdateComplaint(UpdateComplaintDto entity)
         {
-            try
-            {
-
-                await _service.UpdateAsync(entity);
-                return Ok(entity);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex);
-
-            }
+            await _service.UpdateAsync(entity);
 
         }
 

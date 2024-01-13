@@ -16,7 +16,7 @@ namespace DTO.ProductDto_s
         public bool IsDelivered { get; set; }
         public int Price { get; set; }
         public List<IFormFile> newPhotos { get; set; }
-        public int LocationId { get; set; }
+        public int CityId { get; set; }
         public int CategoryId { get; set; }
     }
 }

@@ -234,18 +234,9 @@ namespace BLL.Persistence.Service.Implementation
             }
             catch (Exception ex)
             {
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(AccountService)}.{nameof(Login)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-                else if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(AccountService)}.{nameof(Login)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
+               
                     Log.Error($"{nameof(AccountService)}.{nameof(Login)} - {ex.Message}");
-                }
+               
 
                 throw;
             }

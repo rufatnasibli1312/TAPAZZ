@@ -1,4 +1,5 @@
 ﻿using BLL.Persistence.Service.Abstract;
+using BLL.Persistence.Service.Concrete;
 using DAL.Filter.ActionFilter;
 using DTO.AccountDto_s;
 using DTO.CategoryDto_s;
@@ -18,7 +19,7 @@ using Validation.UserValidator;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     [ServiceFilter(typeof(StandardizeResponseFilter))]
     public class CategoryController : ControllerBase
@@ -28,94 +29,66 @@ namespace API.Controllers
         {
             _service = service;
         }
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task CreateCategory(CategoryToAddDto categoryToAdd)
+        {
+            await _service.AddAsync(categoryToAdd);
 
-        [HttpGet]
-        public async Task<IActionResult> GetCategory(int id)
+
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpPut]
+        public async Task UpdateCategory(UpdateCategoryDto categoryToUpdate)
+        {
+            await _service.UpdateAsync(categoryToUpdate);
+
+
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpDelete]
+        public async Task DeleteCategory(DeleteCategoryDTO entity)
         {
 
-            try
-            {
-                var category = await _service.GetAsync(id);
-                if (category == null)
-                {
-                    return NotFound();
-
-                }
-                return Ok(category);
-            }
-            catch (Exception ex)
-            {
-                
-                return BadRequest(ex.Message);
-            }
+            await _service.Delete(entity);
 
         }
 
-
         [HttpGet]
-        public async Task<IActionResult> GetAllCategory()
-        { 
-            try
-            {
-
-
-                var category = await _service.GetAllAsync();
-                if (category == null)
-                {
-                    return NotFound();
-                }
-               
-                return Ok(category);
-
-            }
-            catch (Exception ex)
-            {
-               
-                return BadRequest(ex.Message);
-            }
-
-        }
-        [HttpGet]
-        public async Task<IActionResult> FindAllParentCategory()
+        public async Task<CategoryFindIdDTO> GetCategory(int id)
         {
-            
-            try
-            {
-                var category = await _service.FindParentCategory();
-                if (category == null)
-                {
-                    return NotFound();
-                }
-                
-                return Ok(category);
-            }
-            catch (Exception ex)
-            {
-               
-                return BadRequest(ex.Message);
-            }
-        }
-        [HttpGet]
-        public async Task<IActionResult> GetChildCategoryWithParentCategoryId(int id)
-        {
-           
-            try
-            {
-                var category = await _service.GetChildCategoryWithParentCategoryId(id);
-                if (category.Count == 0)
-                {
-                    return NotFound();
-                }
-                return Ok(category);
-            }
-            catch (Exception ex)
-            {
-               
-                return BadRequest(ex.Message);
-            }
+
+
+            return await _service.GetAsync(id);
+
+
         }
 
-      
+
+        [HttpGet("GetAllCategory")]
+        public async Task<List<CategoryToListDto>> GetAllCategory()
+        {
+
+            return await _service.GetAllAsync();
+
+        }
+        [HttpGet("FindAllParentCategory")]
+        public async Task<List<FindParentsCategoryDto>> FindAllParentCategory()
+        {
+
+            return await _service.FindParentCategory();
+        }
+
+        [HttpGet("GetChildCategory")]
+        public async Task<List<GetChildCategoryWithParentCategoryId>> GetChildCategory(int id)
+        {
+
+
+            return await _service.GetChildCategoryWithParentCategoryId(id);
+
+        }
+
+
 
 
 
