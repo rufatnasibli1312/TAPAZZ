@@ -45,7 +45,7 @@ namespace API.Controllers
             await _service.UpdateAsync(locationToUpdate);
 
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete]
         public async Task DeleteCity(DeleteLocationDto entity)
         {

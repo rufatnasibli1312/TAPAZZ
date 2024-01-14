@@ -30,13 +30,13 @@ namespace BLL.CustomException
             catch (Exception ex)
             {
                 await HandleExceptionAsync(context, ex);
-                
+
             }
         }
 
         private async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
-            
+
             _logger.LogError(ex, "An error occurred while processing the request.");
 
             context.Response.ContentType = "application/json";

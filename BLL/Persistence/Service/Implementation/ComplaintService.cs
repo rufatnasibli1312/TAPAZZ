@@ -27,8 +27,8 @@ namespace BLL.Persistence.Service.Implementation
     public class ComplaintService : IComplaintService
     {
         public IMapper _mapper { get; }
-        public IComplaintRepository _repository { get; }  //loglama isleri yerine yetirilib
-        public JwtTokenExtractor _jwtTokenExtractor { get; }
+        public IComplaintRepository _repository { get; }  
+        public JwtTokenExtractor _jwtTokenExtractor { get; }  //oke
 
         public ComplaintService(IMapper mapper, IComplaintRepository repository, JwtTokenExtractor jwtTokenExtractor)
         {
@@ -39,8 +39,7 @@ namespace BLL.Persistence.Service.Implementation
         public async Task AddAsync(ComplaintAddDto complaintAddDto)
         {
             List<string> errors = new List<string>();
-            try
-            {
+            
                 var model = JsonSerializer.Serialize(complaintAddDto);
 
 
@@ -64,30 +63,12 @@ namespace BLL.Persistence.Service.Implementation
                 }
 
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(ComplaintService)}.{nameof(AddAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(ComplaintService)}.{nameof(AddAsync)} - {ex.Message}");
-
-                }
-                throw;
-            }
-
-
-
         }
 
         public async Task<ComplaintFindIdDto> GetAsync(int id)
         {
             List<string> errors = new List<string>();
-            try
-            {
+           
                 Complaint complaint = await _repository.GetAsync(id);
                 if (complaint != null)
                 {
@@ -110,19 +91,8 @@ namespace BLL.Persistence.Service.Implementation
                     throw new InvalidOperationException($"{string.Join(", ", errors)}");
                 }
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(CityService)}.{nameof(GetAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(ComplaintService)}.{nameof(GetAsync)} - {ex.Message}");
-                }
-                throw;
-            }
+           
+           
 
 
 
@@ -131,8 +101,7 @@ namespace BLL.Persistence.Service.Implementation
         public async Task<List<ComplaintFindIdDto>> GetAllAsync()
         {
             List<string> errors = new List<string>();
-            try
-            {
+           
                 List<Complaint> complaints = await _repository.GetAllAsync();
                 var UserId = _jwtTokenExtractor.GetUserIdFromJwtToken();
                 List<ComplaintFindIdDto> result = _mapper.Map<List<ComplaintFindIdDto>>(
@@ -148,21 +117,7 @@ namespace BLL.Persistence.Service.Implementation
                     throw new InvalidOperationException($"{string.Join(", ", errors)}");
                 }
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(CityService)}.{nameof(GetAllAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-
-                    Log.Error($"{nameof(ComplaintService)}.{nameof(GetAllAsync)} - {ex.Message}");
-                }
-                throw;
-            }
-
+            
 
         }
 
@@ -170,8 +125,7 @@ namespace BLL.Persistence.Service.Implementation
         {
             List<string> errors = new List<string>();
 
-            try
-            {
+            
                 var model = JsonSerializer.Serialize(entity);
 
                 DeleteComplaintValidator validator = new DeleteComplaintValidator();
@@ -201,24 +155,7 @@ namespace BLL.Persistence.Service.Implementation
                     throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
                 }
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(ComplaintService)}.{nameof(Delete)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-                if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(CityService)}.{nameof(Delete)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-
-                else
-                {
-                    Log.Error($"{nameof(ComplaintService)}.{nameof(Delete)} - {ex.Message}");
-                }
-                throw;
-            }
+            
 
 
 
@@ -229,8 +166,7 @@ namespace BLL.Persistence.Service.Implementation
         public async Task UpdateAsync(UpdateComplaintDto complaintDto)
         {
             List<string> errors = new List<string>();
-            try
-            {
+           
 
                 var model = JsonSerializer.Serialize(complaintDto);
 
@@ -271,24 +207,7 @@ namespace BLL.Persistence.Service.Implementation
 
 
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(ComplaintService)}.{nameof(UpdateAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-                else if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(ComplaintService)}.{nameof(UpdateAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(ComplaintService)}.{nameof(UpdateAsync)} - {ex.Message}");
-                }
-
-                throw;
-            }
+          
 
         }
     }

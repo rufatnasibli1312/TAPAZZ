@@ -23,15 +23,31 @@ namespace DAL.Filter.ActionFilter
                 }
 
                 var statusCode = objectResult.StatusCode ?? 200;
-                context.Result = new ObjectResult(new ApiResponse<object>
+
+                if (statusCode == 200 && objectResult.Value == null)
                 {
-                    StatusCode = statusCode,
-                    Data = objectResult.Value,
-                    Message = "Request successful",
-                })
+                    context.Result = new ObjectResult(new ApiResponse<object>
+                    {
+                        StatusCode = 404,
+                        Data = null,
+                        Message = "Resource not found",
+                    })
+                    {
+                        StatusCode = 404
+                    };
+                }
+                else
                 {
-                    StatusCode = statusCode
-                };
+                    context.Result = new ObjectResult(new ApiResponse<object>
+                    {
+                        StatusCode = statusCode,
+                        Data = objectResult.Value,
+                        Message = "Request successful",
+                    })
+                    {
+                        StatusCode = statusCode
+                    };
+                }
             }
         }
 

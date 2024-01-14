@@ -22,7 +22,7 @@ namespace BLL.Persistence.Service.Concrete
     {
 
         public ICategoryRepository _repository { get; }
-        public IMapper _mapper { get; }  //  loglama elave edilib 
+        public IMapper _mapper { get; }  //  okey
 
         public CategoryService(ICategoryRepository repository, IMapper mapper)
         {
@@ -32,8 +32,7 @@ namespace BLL.Persistence.Service.Concrete
         public async Task AddAsync(CategoryToAddDto categoryDto)
         {
             List<string> errors = new List<string>();
-            try
-            {
+           
 
                 CategoryToAddValidator validator = new CategoryToAddValidator();
                 var model = JsonSerializer.Serialize(categoryDto);
@@ -64,25 +63,7 @@ namespace BLL.Persistence.Service.Concrete
                     throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
                 }
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(CategoryService)}.{nameof(AddAsync)} - {string.Join(", ", errors)}");
-                }
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(CategoryService)}.{nameof(AddAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(CategoryService)}.{nameof(AddAsync)} - {ex.Message}");
-
-                }
-                throw;
-
-            }
+           
         }
 
         public async Task Delete(DeleteCategoryDTO entity)
@@ -153,8 +134,7 @@ namespace BLL.Persistence.Service.Concrete
 
         public async Task<List<CategoryToListDto>> GetAllAsync()
         {
-            try
-            {
+            
                 var result = new List<CategoryToListDto>();
                 List<Category> categories = await _repository.GetAllAsync();
                 if (categories.Count > 0)
@@ -195,12 +175,7 @@ namespace BLL.Persistence.Service.Concrete
 
 
                 return result;
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"{nameof(CategoryService)}.{nameof(GetAllAsync)} - {ex.Message}");
-                throw;
-            }
+           
 
 
 
@@ -208,8 +183,7 @@ namespace BLL.Persistence.Service.Concrete
 
         public async Task<CategoryFindIdDTO> GetAsync(int id)
         {
-            try
-            {
+            
 
                 Category category = await _repository.GetAsync(id);
                 var result = _mapper.Map<CategoryFindIdDTO>(category);
@@ -224,12 +198,7 @@ namespace BLL.Persistence.Service.Concrete
                 return result;
 
 
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"{nameof(CategoryService)}.{nameof(GetAsync)} - {ex.Message}");
-                throw;
-            }
+           
 
         }
 
@@ -237,8 +206,7 @@ namespace BLL.Persistence.Service.Concrete
         {
             List<string> errors = new List<string>();
 
-            try
-            {
+           
                 if (categoryDto == null)
                 {
                     errors.Add("Dto is null");
@@ -286,24 +254,6 @@ namespace BLL.Persistence.Service.Concrete
                 }
 
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(CategoryService)}.{nameof(UpdateAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-                if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(CategoryService)}.{nameof(UpdateAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(CategoryService)}.{nameof(UpdateAsync)} - {ex.Message}");
-                }
-
-                throw;
-            }
 
 
 
@@ -311,8 +261,7 @@ namespace BLL.Persistence.Service.Concrete
 
         public async Task<List<FindParentsCategoryDto>> FindParentCategory()
         {
-            try
-            {
+           
 
                 List<Category> categories = await _repository.GetAllAsync();
                 var result = new List<FindParentsCategoryDto>();
@@ -340,13 +289,7 @@ namespace BLL.Persistence.Service.Concrete
                 }
 
                 return result;
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"{nameof(CategoryService)}.{nameof(FindParentCategory)} - {ex.Message}");
-                throw;
-            }
-
+            
 
 
 
@@ -356,8 +299,7 @@ namespace BLL.Persistence.Service.Concrete
         public async Task<List<GetChildCategoryWithParentCategoryId>> GetChildCategoryWithParentCategoryId(int id)
         {
             List<string> errors = new List<string>();
-            try
-            {
+            
                 var categories = await _repository.GetAllAsync();
                 var result = new List<GetChildCategoryWithParentCategoryId>();
 
@@ -396,21 +338,7 @@ namespace BLL.Persistence.Service.Concrete
                 }
 
                 return result;
-            }
-            catch (Exception ex)
-            {
-                if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(CategoryService)}.{nameof(GetChildCategoryWithParentCategoryId)} - {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(CategoryService)}.{nameof(GetChildCategoryWithParentCategoryId)} - {ex.Message}");
-                }
-
-                throw;
-            }
-
+           
 
 
         }

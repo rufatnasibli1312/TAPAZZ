@@ -36,7 +36,7 @@ namespace BLL.Persistence.Service.Implementation
         public IProductRepository _productRepository { get; }
         public IMapper _mapper { get; }
         public JwtTokenExtractor _jwtTokenExtractor { get; }
-        public IAccountService _accountService { get; }
+        public IAccountService _accountService { get; }   //okey
         public FindUserRole _findUserRole { get; }
         public MyDbContext _dbContext { get; }
         public ProductAddValidator _addValidator { get; }
@@ -58,8 +58,7 @@ namespace BLL.Persistence.Service.Implementation
         public async Task AddAsync(ProductAddDto productDto, string webRootPath)
         {
             List<string> errors = new List<string>();
-            try
-            {
+            
                 var model = JsonSerializer.Serialize(productDto);
 
                 var result = _addValidator.Validate(productDto);
@@ -90,25 +89,7 @@ namespace BLL.Persistence.Service.Implementation
                     throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
                 }
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(AddAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-
-                else if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(AddAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(AddAsync)} - {ex.Message}");
-
-                }
-                throw;
-            }
+            
 
 
 
@@ -117,8 +98,7 @@ namespace BLL.Persistence.Service.Implementation
         public async Task<List<ProductToListDto>> GetAllAsync()
         {
             List<string> errors = new List<string>();
-            try
-            {
+           
                 List<Product> products = await _productRepository.GetAllAsync();
                 if (products.Count == 0)
                 {
@@ -151,29 +131,13 @@ namespace BLL.Persistence.Service.Implementation
                     return result;
                 }
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(GetAllAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(GetAllAsync)} - {ex.Message}");
-
-                }
-                throw;
-            }
-
 
         }
 
         public async Task<ProductFindIdDto> GetAsync(int id)
         {
             List<string> errors = new List<string>();
-            try
-            {
+           
                 Product product = await _productRepository.GetAsync(id);
                 if (product == null)
                 {
@@ -183,29 +147,14 @@ namespace BLL.Persistence.Service.Implementation
                 var result = _mapper.Map<ProductFindIdDto>(product);
                 Log.Information($"{nameof(ProductService)}.{nameof(GetAsync)} - Product Gets Succesfully. Id = {id}");
                 return result;
-            }
-            catch (Exception ex)
-            {
-                if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(GetAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(GetAsync)} - {ex.Message}");
-
-                }
-                throw;
-            }
-
+           
 
         }
 
         public async Task<List<ProductToListDto>> GetMyProductsAsync()
         {
             List<string> errors = new List<string>();
-            try
-            {
+            
                 List<Product> products = await _productRepository.GetAllAsync();
                 if (products == null)
                 {
@@ -222,28 +171,13 @@ namespace BLL.Persistence.Service.Implementation
                     return result;
                 }
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(GetMyProductsAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(GetMyProductsAsync)} - {ex.Message}");
-
-                }
-                throw;
-            }
-
+            
         }
 
         public async Task Delete(DeleteProductDto entity)
         {
             List<string> errors = new List<string>();
-            try
-            {
+            
                 var model = JsonSerializer.Serialize(entity);
 
                 DeleteProductValidator validator = new DeleteProductValidator();
@@ -301,25 +235,6 @@ namespace BLL.Persistence.Service.Implementation
                     throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
                 }
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(Delete)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-
-                else if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(Delete)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(Delete)} - {ex.Message}");
-
-                }
-                throw;
-            }
 
         }
 
@@ -423,8 +338,7 @@ namespace BLL.Persistence.Service.Implementation
         {
             List<string> errors = new List<string>();
 
-            try
-            {
+           
 
                 // Retrieve the product from the repository based on your filter criteria
                 List<Product> products = await _productRepository.GetByFilterAsync(filter);
@@ -467,12 +381,7 @@ namespace BLL.Persistence.Service.Implementation
 
                 Log.Information($"{nameof(ProductService)}.{nameof(GetByFilter)} - Product Gets Successfully.");
                 return filteredProducts;
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, $"{nameof(ProductService)}.{nameof(GetByFilter)} - Error getting product.");
-                throw;
-            }
+           
         }
 
 

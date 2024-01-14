@@ -26,7 +26,7 @@ namespace BLL.Persistence.Service.Implementation
     {
         public IFavouriteRepository _favouriteRepository { get; }
         public IMapper _mapper { get; }
-        public JwtTokenExtractor _jwtTokenExtractor { get; } //loglama edilib
+        public JwtTokenExtractor _jwtTokenExtractor { get; } //oke
         public IProductService _productService { get; }
 
         public FavouriteService(IFavouriteRepository favouriteRepository, IMapper mapper, JwtTokenExtractor jwtTokenExtractor, IProductService productService)
@@ -41,8 +41,7 @@ namespace BLL.Persistence.Service.Implementation
         public async Task AddAsync(FavouriteAddDto favouriteAddDto)
         {
             List<string> errors = new List<string>();
-            try
-            {
+           
                 var model = JsonSerializer.Serialize(favouriteAddDto);
 
                 FavouriteAddValidator validator = new FavouriteAddValidator();
@@ -84,25 +83,7 @@ namespace BLL.Persistence.Service.Implementation
                     throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
                 }
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(FavouriteService)}.{nameof(AddAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-
-                else if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(FavouriteService)}.{nameof(AddAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(FavouriteService)}.{nameof(AddAsync)} - {ex.Message}");
-
-                }
-                throw;
-            }
+           
 
 
 
@@ -112,8 +93,7 @@ namespace BLL.Persistence.Service.Implementation
         public async Task<List<FavouriteGetProductDto>> GetAllAsync()
         {
             List<string> errors = new List<string>();
-            try
-            {
+           
                 List<Favorite> favorites = await _favouriteRepository.GetAllAsync();
                 if (favorites != null)
                 {
@@ -129,21 +109,7 @@ namespace BLL.Persistence.Service.Implementation
                     throw new InvalidOperationException($"{string.Join(", ", errors)}");
                 }
 
-            }
-            catch (Exception ex)
-            {
-
-                if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(FavouriteService)}.{nameof(GetAllAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(FavouriteService)}.{nameof(GetAllAsync)} - {ex.Message}");
-
-                }
-                throw;
-            }
+            
 
 
         }
@@ -151,8 +117,7 @@ namespace BLL.Persistence.Service.Implementation
         public async Task<FavouriteGetProductDto> GetAsync(int id)
         {
             List<string> errors = new List<string>();
-            try
-            {
+           
                 Favorite favorite = await _favouriteRepository.GetAsync(id);
                 if (favorite != null)
                 {
@@ -177,28 +142,14 @@ namespace BLL.Persistence.Service.Implementation
                     throw new InvalidOperationException($"{string.Join(", ", errors)}");
                 }
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(FavouriteService)}.{nameof(GetAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(FavouriteService)}.{nameof(GetAsync)} - {ex.Message}");
-
-                }
-                throw;
-            }
+          
 
         }
 
         public async Task Delete(DeleteFavouriteDto entity)
         {
             List<string> errors = new List<string>();
-            try
-            {
+           
                 var model = JsonSerializer.Serialize(entity);
 
                 DeleteFavouriteValidator validator = new DeleteFavouriteValidator();
@@ -233,26 +184,7 @@ namespace BLL.Persistence.Service.Implementation
                 }
 
 
-            }
-            catch (Exception ex)
-            {
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(FavouriteService)}.{nameof(Delete)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-
-                else if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(FavouriteService)}.{nameof(Delete)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(FavouriteService)}.{nameof(Delete)} - {ex.Message}");
-
-                }
-                throw;
-            }
-
+           
 
         }
     }
