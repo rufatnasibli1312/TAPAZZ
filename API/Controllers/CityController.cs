@@ -31,7 +31,7 @@ namespace API.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task CreateCity(LocationtoAddDTO locationToAddDto)
+        public async Task CreateCity(CitytoAddDTO locationToAddDto)
         {
 
             await _service.AddAsync(locationToAddDto);
@@ -39,21 +39,21 @@ namespace API.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpPut]
-        public async Task UpdateCity(LocationToUpdateDTO locationToUpdate)
+        public async Task UpdateCity(CityToUpdateDTO locationToUpdate)
         {
 
             await _service.UpdateAsync(locationToUpdate);
 
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
-        public async Task DeleteCity(DeleteLocationDto entity)
+        public async Task DeleteCity(DeleteCityDto entity)
         {
 
             await _service.Delete(entity);
         }
         [HttpGet]
-        public async Task<LocationFindIdDTO> GetCity(int id)
+        public async Task<CityFindIdDTO> GetCity(int id)
         {
 
 
@@ -62,7 +62,7 @@ namespace API.Controllers
 
         }
         [HttpGet("GetAllCities")]
-        public async Task<List<LocationToListDto>> GetAllCities()
+        public async Task<List<CityToListDto>> GetAllCities()
         {
 
             return await _service.GetAllAsync();

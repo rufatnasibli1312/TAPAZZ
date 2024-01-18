@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DTO.LocationDto_s
 {
-    public class LocationAddProductsGetDTO
+    public class DeleteCityDto
     {
-        public List<ProductDto> Products { get; set; }
+        public int Id { get; set; }
     }
 }

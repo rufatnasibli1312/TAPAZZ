@@ -11,11 +11,11 @@ namespace BLL.Persistence.Service.Abstract
     public interface ICityService
     {
 
-        Task AddAsync(LocationtoAddDTO locationDto);
-        Task<LocationFindIdDTO> GetAsync(int id);
-        Task<List<LocationToListDto>> GetAllAsync();
-        Task Delete(DeleteLocationDto entity);
-        Task UpdateAsync(LocationToUpdateDTO locationToUpdateDTO);
+        Task AddAsync(CitytoAddDTO locationDto);
+        Task<CityFindIdDTO> GetAsync(int id);
+        Task<List<CityToListDto>> GetAllAsync();
+        Task Delete(DeleteCityDto entity);
+        Task UpdateAsync(CityToUpdateDTO locationToUpdateDTO);
 
         
     }

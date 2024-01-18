@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Validation.LocationValidator
 {
-    public class DeleteCityValidation : AbstractValidator<DeleteLocationDto>
+    public class DeleteCityValidation : AbstractValidator<DeleteCityDto>
     {
         public DeleteCityValidation()
         {

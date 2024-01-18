@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DTO.LocationDto_s
 {
-    public class DeleteLocationDto
+    public class CityToListDto
     {
         public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

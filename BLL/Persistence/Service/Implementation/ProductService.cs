@@ -241,8 +241,7 @@ namespace BLL.Persistence.Service.Implementation
         public async Task UpdateAsync(UpdateProductDto updateProductDto, string webRootPath)
         {
             List<string> errors = new List<string>();
-            try
-            {
+           
                 var model = JsonSerializer.Serialize(updateProductDto);
                 
                 
@@ -306,25 +305,7 @@ namespace BLL.Persistence.Service.Implementation
                 {
                     throw new ValidationException($"Validation failed-{string.Join(", ", errors)}.");
                 }
-            }
-            catch (Exception ex)
-            {
-                if (ex is ValidationException)
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(UpdateAsync)} - Validation failed. Errors: {string.Join(", ", errors)}");
-                }
-
-                else if (ex is InvalidOperationException)
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(UpdateAsync)} - InvalidOperationException:Errors: {string.Join(", ", errors)}");
-                }
-                else
-                {
-                    Log.Error($"{nameof(ProductService)}.{nameof(UpdateAsync)} - {ex.Message}");
-
-                }
-                throw;
-            }
+            
 
         }
 

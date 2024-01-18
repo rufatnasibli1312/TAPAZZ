@@ -35,10 +35,10 @@ namespace Validation.ServiceExtensions
             services.AddScoped<IValidator<UpdateComplaintDto>, UpdateComplaintValidator>();
             services.AddScoped<IValidator<DeleteFavouriteDto>, DeleteFavouriteValidator>();
             services.AddScoped<IValidator<FavouriteAddDto>, FavouriteAddValidator>();
-            services.AddScoped<IValidator<DeleteLocationDto>, DeleteCityValidation>();
-            services.AddScoped<IValidator<LocationtoAddDTO>, CitytoAddValidator>();
-            services.AddScoped<IValidator<DeleteLocationDto>, DeleteCityValidation>();
-            services.AddScoped<IValidator<LocationToUpdateDTO>, CityToUpdateValidator>();
+            services.AddScoped<IValidator<DeleteCityDto>, DeleteCityValidation>();
+            services.AddScoped<IValidator<CitytoAddDTO>, CitytoAddValidator>();
+            services.AddScoped<IValidator<DeleteCityDto>, DeleteCityValidation>();
+            services.AddScoped<IValidator<CityToUpdateDTO>, CityToUpdateValidator>();
             services.AddScoped<IValidator<DeleteProductDto>, DeleteProductValidator>();
             services.AddScoped<IValidator<ProductAddDto>, ProductAddValidator>();
             services.AddScoped<IValidator<UpdateProductDto>, UpdateProductValidator>();

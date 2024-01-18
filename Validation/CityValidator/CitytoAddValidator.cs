@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Validation.LocationValidator
 {
-    public class CitytoAddValidator : AbstractValidator<LocationtoAddDTO>
+    public class CitytoAddValidator : AbstractValidator<CitytoAddDTO>
     {
         public CitytoAddValidator()
         {

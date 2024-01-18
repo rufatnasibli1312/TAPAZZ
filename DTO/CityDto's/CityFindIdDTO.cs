@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entity.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace DTO.LocationDto_s
 {
-    public class LocationtoAddDTO
+    public class CityFindIdDTO
     {
         public string Name { get; set; }
+        
     }
 }

@@ -32,7 +32,7 @@ namespace BLL.Persistence.Service.Concrete
 
         }
 
-        public async Task AddAsync(LocationtoAddDTO locationDto)
+        public async Task AddAsync(CitytoAddDTO locationDto)
         {
             List<string> errors = new List<string>();
 
@@ -59,7 +59,7 @@ namespace BLL.Persistence.Service.Concrete
 
         }
 
-        public async Task Delete(DeleteLocationDto entity)
+        public async Task Delete(DeleteCityDto entity)
         {
             List<string> errors = new List<string>();
 
@@ -97,11 +97,11 @@ namespace BLL.Persistence.Service.Concrete
 
         }
 
-        public async Task<List<LocationToListDto>> GetAllAsync()
+        public async Task<List<CityToListDto>> GetAllAsync()
         {
 
             List<City> list = await _repository.GetAllAsync();
-            List<LocationToListDto> result = _mapper.Map<List<LocationToListDto>>(list);
+            List<CityToListDto> result = _mapper.Map<List<CityToListDto>>(list);
             if (list.Count != 0)
             {
                 Log.Error($"{nameof(CityService)}.{nameof(GetAllAsync)} - Cities not found");
@@ -115,12 +115,12 @@ namespace BLL.Persistence.Service.Concrete
 
         }
 
-        public async Task<LocationFindIdDTO> GetAsync(int id)
+        public async Task<CityFindIdDTO> GetAsync(int id)
         {
 
 
             City location = await _repository.GetAsync(id);
-            var result = _mapper.Map<LocationFindIdDTO>(location);
+            var result = _mapper.Map<CityFindIdDTO>(location);
 
             if (result == null)
             {
@@ -134,7 +134,7 @@ namespace BLL.Persistence.Service.Concrete
 
         }
 
-        public async Task UpdateAsync(LocationToUpdateDTO locationToUpdateDTO)
+        public async Task UpdateAsync(CityToUpdateDTO locationToUpdateDTO)
         {
             List<string> errors = new List<string>();
 
